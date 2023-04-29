@@ -1,4 +1,4 @@
-name: CI -> Deploy to My website
+name: CI -> Deploy to Jay infra Projects
 on:
   push:
     branches: 
