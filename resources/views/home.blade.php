@@ -1,160 +1,81 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Jay infra Projects</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body>
+<head>
+<title>Coming Soon</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+body {
+  /*background: linear-gradient(90deg, white, gray);*/
+  background-color: #eee;
+}
 
-		<!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo"><a href="index.html"> <span> </span></a></div>
-				<a href="#menu">Menu</a>
-			</header>
+body, h1, p {
+  font-family: "Helvetica Neue", "Segoe UI", Segoe, Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-                    <li><a href="clients.html">Clients</a></li>
-				</ul>
-			</nav>
+.container {
+  margin-left:  auto;
+  margin-right:  auto;
+  margin-top: 177px;
+  max-width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
 
-		<!-- Banner -->
-			<section class="banner full">
-				<article>
-					<img src="images/slide01.jpg" alt="" />
-					<div class="inner">
-						<header>
-                            <h3><font color=" red">JAY INFRA PROJECTS</font> <a href="#"></a></h3>
-							<!--<h3>PHED</h3>-->
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide02.jpg" alt="" />
-					<div class="inner">
-						<header>
-                            <h3><font color=" red">JAY INFRA PROJECTS</font> <a href="#"></a></h3>
-							<!--<h3>PHED</h3>-->
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide03.jpg"  alt="" />
-					<div class="inner">
-						<header>
-                            <h3><font color=" red">JAY INFRA PROJECTS</font> <a href="#"></a></h3>
-							<!--<h3>PHED</h3>-->
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide04.jpg"  alt="" />
-					<div class="inner">
-						<header>
-                            <h3><font color=" red">JAY INFRA PROJECTS</font> <a href="#"></a></h3>
-							<!--<h3>PHED </h3>-->
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="images/slide05.jpg"  alt="" />
-					<div class="inner">
-						<header>
-                            <h3><font color=" red">JAY INFRA PROJECTS</font> <a href="#"></a></h3>
-							<!--<h3>PHED </h3>-->
-						</header>
-					</div>
-				</article>
-			</section>
+.row:before, .row:after {
+  display: table;
+  content: " ";
+}
 
-		<!-- One -->
-			<section id="one" class="wrapper style2">
-				<div class="inner">
-					<div class="grid-style">
+h1 {
+  font-size: 48px;
+  font-weight: 300;
+  margin: 0 0 20px 0;
+}
 
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img src="images/pic02.jpg" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<p><font color="red">Work in progress under PHED</font></p>
-										<h4>Katihar District</h4>
-									</header>
-									<p> To achieve our goal to provide the clean and free water to all of the houses we started our journey from Katihar disctict, and we are pleased to share that we are almost done our work in this area.</p>
-									<footer class="align-center">
-                                        <a href="https://bvm.bihar.gov.in/nishchay/cdws/bjJLS0dGOG1XbU9MOEJ5NXBValgzdz09" class="button alt" target="_blank">Learn More</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+.lead {
+  font-size: 21px;
+  font-weight: 200;
+  margin-bottom: 20px;
+}
 
-						<div>
-							<div class="box">
-								<div class="image fit">
-									<img src="images/pic03.jpg" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-                                        <p><font color="red">Work in progress under PHED</font></p>
-                                        <h4>Azamnagar Block </h4>
-									</header>
-									<p> It's our goal to provide the clean and free water to all of the houses, and we are moving in right direction towards it by fulfilling the safe water need in Azamnagar Block in  Katihar disctict.</p>
-									<footer class="align-center">
-                                        <a href="https://bvm.bihar.gov.in/nishchay/cdws/bjJLS0dGOG1XbU9MOEJ5NXBValgzdz09" class="button alt" target="_blank">Learn More</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+p {
+  margin: 0 0 10px;
+}
 
-					</div>
-				</div>
-			</section>
+a {
+  color: #3282e6;
+  text-decoration: none;
+}
+</style>
+</head>
 
+<body>
+<div class="container text-center" id="error">
 
+  <svg height="100" width="100">
+    <circle cx="50" cy="50" r="31" stroke="#679b08" stroke-width="9.5" fill="none" />
+    <circle cx="50" cy="50" r="6" stroke="#679b08" stroke-width="1" fill="#679b08" />
+    <line x1="50" y1="50" x2="35" y2="50" style="stroke:#679b08;stroke-width:6" />
+    <line x1="65" y1="35" x2="50" y2="50" style="stroke:#679b08;stroke-width:6" />
+    <path d="M59 65 L83 65 L75 87 Z" fill="#679b08" />
+    <rect width="20" height="9" x="70" y="56" style="fill:#eee;stroke-width:0;" />
+  </svg>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-icon text-success"><span class="uxicon uxicon-clock-refresh"></span></div>
+      <h1>Future home of something quite cool.</h1>
+      <p class="lead">If you're the <strong>site owner</strong>, <a href="/cpanel">log in</a> to launch this site</p>
+      <p class="lead">If you are a <strong>visitor</strong>, check back soon.</p>
+    </div>
+  </div>
 
+</div>
 
-        <section id="two" class="wrapper style3">
-            <div class="inner">
-                <header class="align-center">
-                    <p><h><font color="red">Communicate with us on below details</font></h> </p>
-                    <h2>Allahabad Bank Colony, Khajpura, P.S- Shastri Nagar, Patna, Bihar-800023 </h2>
-                    <h3><font class="icon fa fa-volume-control-phone" ><span class="label">+91 61222 54058</span></font> +91 61222 54058,&nbsp; <font class="icon fa-envelope-o"><span class="label">Email</span></font>&nbsp; jayinfraprojects.bihar@gmail.com </h3>
-               </header>
-            </div>
-        </section>
-
-
-
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-					</ul>
-				</div>
-				<!--<div class="copyright">
-					&copy;All rights reserved to AlgoStark.
-				</div>-->
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
