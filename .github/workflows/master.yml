@@ -12,7 +12,7 @@ jobs:
       - name: Upload from public_html via FTP
         uses: airvzxf/ftp-deployment-action@latest
         with:
-          server: 166.62.10.48
+          server: 68.178.150.226
           user: ${{ secrets.FTP_INFRA_USERNAME }}
           password: ${{ secrets.FTP_INFRA_PASSWORD }}
           # local_dir: "./public_html"
