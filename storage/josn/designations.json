@@ -1,0 +1,15 @@
+
+[
+    {
+        "id": 1,
+        "name": "manager"
+    },
+    {
+        "id": 2,
+        "name": "office executive"
+    },
+    {
+        "id": 3,
+        "name": "field executive"
+    }
+]

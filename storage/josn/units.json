@@ -1,0 +1,59 @@
+
+[
+    {
+        "id": 1,
+        "sku": "cl",
+        "name": "centilitre"
+    },
+    {
+        "id": 2,
+        "sku": "dl",
+        "name": "deciliter"
+    },
+    {
+        "id": 3,
+        "sku": "gal",
+        "name": "gallon"
+    },
+    {
+        "id": 4,
+        "sku": "li",
+        "name": "liter"
+    },
+    {
+        "id": 5,
+        "sku": "ml",
+        "name": "millilitre"
+    },
+    {
+        "id": 6,
+        "sku": "gm",
+        "name": "gram"
+    },
+    {
+        "id": 7,
+        "sku": "kg",
+        "name": "kilogram"
+    },
+    {
+        "id": 8,
+        "sku": "box",
+        "name": "box"
+    },
+    {
+        "id": 9,
+        "sku": "set",
+        "name": "set"
+    },
+    {
+        "id": 10,
+        "sku": "nos",
+        "name": "nos"
+    },
+    {
+        "id": 11,
+        "sku": "pcs",
+        "name": "pcs"
+    }
+]
+

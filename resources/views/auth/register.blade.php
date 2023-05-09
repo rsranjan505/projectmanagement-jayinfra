@@ -1,13 +1,13 @@
-<x-laravel-ui-adminlte::adminlte-layout>
+@extends('admin.layouts.auth_layout')
 
-    <body class="hold-transition register-page">
+@section('content')
+
         <div class="register-box">
-            <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-            </div>
-
-            <div class="card">
-                <div class="card-body register-card-body">
+            <div class="card card-outline card-primary">
+                <div class="card-header text-center">
+                  <a href="{{ url('/home') }}" class="h1"><b>Jay</b>Infra</a>
+                </div>
+                <div class="card-body">
                     <p class="login-box-msg">Register a new membership</p>
 
                     <form method="post" action="{{ route('register') }}">
@@ -85,6 +85,4 @@
 
             <!-- /.form-box -->
         </div>
-        <!-- /.register-box -->
-    </body>
-</x-laravel-ui-adminlte::adminlte-layout>
+@endsection
