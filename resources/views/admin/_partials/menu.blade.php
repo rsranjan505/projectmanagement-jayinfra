@@ -5,6 +5,14 @@
         <p>Dashboard</p>
     </a>
 </li>
+<li class="nav-item @yield('profile_section')">
+    <a href="{{ route('profile-view')}}" class="nav-link">
+      <i class="nav-icon fa fa-user"></i>
+      <p>
+        Profile
+      </p>
+    </a>
+</li>
 <li class="nav-item">
     <a href="#" class="nav-link">
       <i class="nav-icon fas fa-th"></i>
@@ -87,8 +95,8 @@
       </li>
     </ul>
 </li>
-<li class="nav-item {{ Request::is('employee/add') ? 'menu-open' : '' }}">
-    <a href="#" class="nav-link {{ Request::is('employee/add') ? 'active' : '' }}">
+<li class="nav-item @yield('employee_section')">
+    <a href="#" class="nav-link ">
       <i class="nav-icon fas fa-table"></i>
       <p>
         Employee
@@ -97,21 +105,15 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="{{ route('user-list')}}" class="nav-link {{ Request::is('employee') ? 'active' : '' }}">
+        <a href="{{ route('user-list')}}" class="nav-link @yield('employee_list_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>List</p>
         </a>
       </li>
       <li class="nav-item">
-        <a href="{{ route('create-user')}}" class="nav-link {{ Request::is('employee/add') ? 'active' : '' }}">
+        <a href="{{ route('create-user')}}" class="nav-link @yield('employee_add_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>Add</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ route('create-user')}}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Edit</p>
         </a>
       </li>
     </ul>
@@ -134,34 +136,7 @@
     </ul>
 </li>
 
-<li class="nav-item">
-    <a href="#" class="nav-link">
-      <i class="nav-icon fas fa-th"></i>
-      <p>
-        Company Profile
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="pages/charts/chartjs.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Add</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="pages/charts/flot.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>view</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="pages/charts/inline.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Edit</p>
-        </a>
-      </li>
-    </ul>
+
     <li class="nav-item">
         <a href="#" class="nav-link">
           <i class="nav-icon fa fa-book"></i>
@@ -189,23 +164,7 @@
                   <p>GSTIN</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                   Business Profile
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>View</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
@@ -275,7 +234,7 @@
             </ul>
           </li>
         </ul>
-      </li>
-</li>
+    </li>
+
 
 

@@ -19,11 +19,15 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
     <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/select.dataTables.min.css')}}">
+
     {{-- @stack('styles') --}}
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     {{-- @section('content') --}}
+    @include('admin._partials.toastr',['errors'=> $errors])
     <div class="wrapper">
         @include('admin._partials.nav-header')
         @include('admin._partials.sidebar')
@@ -58,6 +62,10 @@
     <script src="{{ asset('admin/js/adminlte.js') }}"></script>
 
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+
+    <script src="{{ asset('admin/plugins/datatables.net/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 
 
     @stack('scripts')

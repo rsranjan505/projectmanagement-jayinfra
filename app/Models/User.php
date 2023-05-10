@@ -52,6 +52,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(City::class,'city_id');
     }
 
+    public function image()
+    {
+        return $this->morphOne(AssetFile::class, 'pictureable','model_type', 'model_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

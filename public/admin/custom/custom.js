@@ -1,3 +1,26 @@
+
+//Employee state
+$('#state_id').on('change', function () {
+    let state_id = this.value;
+    $.ajax({
+        url: "/city/"+state_id,
+        type: "get",
+
+        success: function (res) {
+            console.log(res);
+            let html = "";
+            html += '<select id="city_id" type="text" name="city_id" search class="form-control">';
+            res.data.forEach((val, key) => {
+                html += "<option value=" + val.id + ">" + val.name + "</option>";
+            });
+            html += '</select>';
+            $("#city_id").html("");
+            $("#city_id").html(html);
+        },
+    });
+});
+
+
 $(function () {
     $.validator.setDefaults({
       submitHandler: function () {
@@ -56,44 +79,3 @@ $(function () {
     });
   });
 
-
-  //Sweet alert
-  $(function() {
-    var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-
-    $('.swalDefaultSuccess').click(function() {
-      Toast.fire({
-        icon: 'success',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultInfo').click(function() {
-      Toast.fire({
-        icon: 'info',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultError').click(function() {
-      Toast.fire({
-        icon: 'error',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultWarning').click(function() {
-      Toast.fire({
-        icon: 'warning',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-    $('.swalDefaultQuestion').click(function() {
-      Toast.fire({
-        icon: 'question',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
-  });
