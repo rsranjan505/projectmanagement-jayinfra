@@ -2,8 +2,8 @@
 
 @section('content')
 @section('page_title', 'JayInfra Projects | Employee')
-@section('employee_section', 'menu-open')
-@section('employee_list_section', 'active')
+@section('setting_section', 'menu-open')
+@section('employee_section', 'active')
 
 @include('admin._partials.bredcum',['title'=>'Employee'] )
 

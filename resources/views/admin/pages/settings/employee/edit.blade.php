@@ -1,156 +1,19 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-@section('page_title', 'JayInfra Projects | Profile')
-@section('profile_section', 'menu-open')
-
-@include('admin._partials.bredcum',['title'=>'Profile'] )
+@section('page_title', 'JayInfra Projects | Employee')
+@section('setting_section', 'menu-open')
+@section('employee_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Employee'] )
 
 <section class="content">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-3">
-
-          <!-- Profile Image -->
-          <div class="card card-primary card-outline">
-            <div class="card-body box-profile">
-              <div class="text-center">
-                @if ($data['employee']->image !=null)
-                    <img class="profile-user-img img-fluid img-circle"
-                    src="{{$data['employee']->image->url}}"
-                    alt="User profile picture">
-                @else
-                    <img class="profile-user-img img-fluid img-circle"
-                     src="{{asset('admin/images/accounticon.png')}}"
-                     alt="User profile picture">
-                @endif
-
-              </div>
-
-              <h3 class="profile-username text-center">{{$data['employee']->name}}</h3>
-
-              <p class="text-muted text-center">{{$data['employee']->designation !=null ?? $data['employee']->designation->name}}</p>
-
-              <ul class="list-group list-group-unbordered mb-3">
-
-                <li class="list-group-item">
-                  <b>Employee Id</b> <a class="float-right">{{$data['employee']->employee_id}}</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Employee Type</b> <a class="float-right">{{$data['employee']->employee_type}}</a>
-                </li>
-                <li class="list-group-item">
-                    <b>Gender</b> <a class="float-right">{{$data['employee']->gender}}</a>
-                </li>
-              </ul>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-
-          <!-- About Me Box -->
-          <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">About Me</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <strong><i class="fas fa-envelope mr-1"></i> Email Address</strong>
-              <p class="text-muted">
-                {{$data['employee']->email}}
-              </p>
-
-              <hr>
-              <strong><i class="fas fa-phone mr-1"></i> Phone Number</strong>
-              <p class="text-muted">
-                {{$data['employee']->mobile}}
-              </p>
-
-              <hr>
-
-              <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-              <p class="text-muted">{{$data['employee']->address}}, {{$data['employee']->state !=null ? $data['employee']->state->name : ''}}, {{$data['employee']->city !=null ? $data['employee']->city->name : ''}} {{$data['employee']->postcode}}</p>
-
-              <hr>
-
-              <strong><i class="fa fa-id-badge mr-1"></i> Role</strong>
-
-              <p class="text-muted">
-                {{$data['employee']->role ? $data['employee']->role->name : ''}}
-              </p>
-
-              <hr>
-              <strong><i class="fa fa-briefcase mr-1"></i> Department</strong>
-
-              <p class="text-muted">
-                {{$data['employee']->department !=null ? $data['employee']->department->name : ''}}
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-users mr-1" aria-hidden="true"></i> Team</strong>
-
-              <p class="text-muted"> {{$data['employee']->team !=null ? $data['employee']->team->name : ''}}</p>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                </ul>
-                </div>
-            @endif
-
-          <div class="card">
-            <div class="card-header p-2">
-              <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a></li>
-                <li class="nav-item"><a class="nav-link" href="#edit" data-toggle="tab">Edit</a></li>
-              </ul>
-            </div><!-- /.card-header -->
-            <div class="card-body">
-              <div class="tab-content">
-
-                <div class="active tab-pane" id="settings">
-                  <form class="form-horizontal" method="post" action="{{route('change-password')}}">
-                    @csrf
-                    <div class="form-group row">
-                      <label for="inputName" class="col-sm-3 col-form-label">Current Password</label>
-                      <div class="col-sm-7">
-                        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Current Password">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputEmail" class="col-sm-3 col-form-label">New Password</label>
-                      <div class="col-sm-7">
-                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputName2" class="col-sm-3 col-form-label">Confirm New Password</label>
-                      <div class="col-sm-7">
-                        <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="offset-sm-3 col-sm-7">
-                        <button type="submit" class="btn btn-success">Update</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane" id="edit">
-                    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    @include('admin.components.employee-nav-header' ,['activeTab' => 'edit'])
+                    <div class="card-body">
+                        @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -186,13 +49,13 @@
                                       </div>
                                   </div>
                                   <div class="col-12 col-sm-6">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Gender*</label>
-                                          <select class="form-control" id="gender" name="gender">
-                                            <option value="M"  {{$data['employee']->gender == 'M' ? 'selected' : '' }}>Male</option>
-                                            <option value="F"  {{$data['employee']->gender == 'F' ? 'selected' : '' }}>Female</option>
-                                          </select>
-                                      </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Gender*</label>
+                                        <select class="form-control" id="gender" name="gender">
+                                          <option value="M"  {{$data['employee']->gender == 'M' ? 'selected' : '' }}>Male</option>
+                                          <option value="F"  {{$data['employee']->gender == 'F' ? 'selected' : '' }}>Female</option>
+                                        </select>
+                                    </div>
                                   </div>
                               </div>
                               <div class="row">
@@ -317,18 +180,42 @@
                             </div>
                         </form>
                         @endif
+
+                    </div>
                 </div>
-                  <!-- /.tab-pane -->
-                <!-- /.tab-pane -->
-              </div>
-              <!-- /.tab-content -->
-            </div><!-- /.card-body -->
-          </div>
-          <!-- /.card -->
+            </div>
         </div>
-        <!-- /.col -->
+    </div>
+</section>
+
+<div class="modal fade" id="add-employee">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Employee</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
-      <!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </section>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+
+  <script src="{{ asset('admin/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+  <script src="{{ asset('admin/plugins/jquery-validation/additional-methods.min.js')}}"></script>
+  <script src="{{ asset('admin/custom/custom.js')}}"></script>
+
+  <script>
+
+</script>
 @endsection

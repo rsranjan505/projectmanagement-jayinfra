@@ -94,7 +94,7 @@ class EmployeeController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('admin.pages.employee.list');
+        return view('admin.pages.settings.employee.list');
     }
 
     public function create()
@@ -103,7 +103,7 @@ class EmployeeController extends Controller
         $this->data['departments'] = Department::all();
         $this->data['designations'] = Designation::all();
         $this->data['state'] = State::all();
-        return view('admin.pages.employee.add',['data' => $this->data]);
+        return view('admin.pages.settings.employee.add',['data' => $this->data]);
     }
 
     public function save(Request $request)
@@ -111,7 +111,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|unique:users,email',
-            'mobile' =>'required',
+            'phone' =>'required',
             'address' => 'required',
             'state_id' =>'required',
             'city_id' =>'required',
@@ -142,7 +142,7 @@ class EmployeeController extends Controller
         $this->data['state'] = State::all();
         $this->data['city'] = City::all();
         $this->data['employee'] = User::find($id);
-        return view('admin.pages.employee.edit',['data' => $this->data]);
+        return view('admin.pages.settings.employee.edit',['data' => $this->data]);
     }
 
     public function changeStatus($id)

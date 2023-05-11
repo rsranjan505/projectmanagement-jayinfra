@@ -3,18 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Department;
+use App\Models\Designation;
+use App\Models\Role;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    public $data;
+
     public function index()
     {
         $relation = ['department','designation','role','state','city','image'];
-        $user = User::where('id',auth()->user()->id)->with($relation)->first();
+        $this->data['roles'] = Role::all();
+        $this->data['departments'] = Department::all();
+        $this->data['designations'] = Designation::all();
+        $this->data['state'] = State::all();
+        $this->data['city'] = City::all();
+        $this->data['employee'] = User::where('id',auth()->user()->id)->with($relation)->first();
 
-        return view('admin.pages.profile.view',['user'=>$user]);
+        return view('admin.pages.profile.view',['data'=>$this->data]);
     }
 
     public function create()

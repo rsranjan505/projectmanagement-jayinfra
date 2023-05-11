@@ -95,7 +95,7 @@
       </li>
     </ul>
 </li>
-<li class="nav-item @yield('employee_section')">
+{{-- <li class="nav-item @yield('employee_section')">
     <a href="#" class="nav-link ">
       <i class="nav-icon fas fa-table"></i>
       <p>
@@ -117,7 +117,7 @@
         </a>
       </li>
     </ul>
-</li>
+</li> --}}
 <li class="nav-item">
     <a href="#" class="nav-link">
       <i class="nav-icon fa fa-book"></i>
@@ -137,7 +137,7 @@
 </li>
 
 
-    <li class="nav-item">
+    <li class="nav-item @yield('setting_section')">
         <a href="#" class="nav-link">
           <i class="nav-icon fa fa-book"></i>
           <p>
@@ -147,41 +147,20 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
-                  <p>Profile</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="{{ route('organisation-view')}}" class="nav-link @yield('business_profile_section')">
                   <i class="far fa-user nav-icon"></i>
                   <p>Business Profile</p>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-user nav-icon"></i>
-                  <p>GSTIN</p>
+                <a href="{{ route('user-list')}}" class="nav-link @yield('employee_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Employee
+                </p>
                 </a>
             </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Employee
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>View</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>

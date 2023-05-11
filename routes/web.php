@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Settings\CompanyProfileController;
 use App\Http\Controllers\Admin\Settings\DepartmentController;
 use App\Http\Controllers\Admin\Settings\DesignationController;
 use App\Http\Controllers\Admin\Settings\GstController;
+use App\Http\Controllers\Admin\Settings\OrganisationController;
 use App\Http\Controllers\Admin\Settings\RolesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
@@ -51,6 +52,11 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::get('/edit/{id?}', [ProfileController::class, 'edit'])->name('edit-profile');
         Route::post('/edit', [ProfileController::class, 'update'])->name('update-profile');
         Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change-password');
+    });
+    //orgainaisation
+    Route::prefix('organisation')->group(function () {
+        Route::get('/', [OrganisationController::class, 'index'])->name('organisation-view');
+        Route::post('/', [OrganisationController::class, 'save'])->name('save-organisation');
     });
 
 
