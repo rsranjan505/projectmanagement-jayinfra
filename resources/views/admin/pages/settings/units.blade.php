@@ -13,8 +13,8 @@
                 <div class="card">
                     @include('admin.components.unit-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
-                        <div class="table ">
-                            <table class="table table-responsive" id="units-table">
+                        <div class="table table-responsive">
+                            <table class="table" id="units-table">
                                 <thead>
                                     <tr>
                                         <th>SL No</th>
