@@ -13,53 +13,54 @@
       </p>
     </a>
 </li>
-<li class="nav-item">
-    <a href="#" class="nav-link">
-      <i class="nav-icon fas fa-th"></i>
-      <p>
-        Inventory
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="pages/charts/chartjs.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Category</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/charts/chartjs.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Material</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/charts/flot.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Suppliers</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/charts/flot.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Purchase</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/charts/inline.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Sell</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/charts/uplot.html" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Stocks</p>
-            </a>
-        </li>
-    </ul>
-</li>
+    <li class="nav-item @yield('inventory_section')">
+        <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+            Inventory
+            <i class="right fas fa-angle-left"></i>
+        </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('category-list')}}" class="nav-link @yield('category_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Category</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pages/charts/chartjs.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Material</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pages/charts/flot.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Suppliers</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pages/charts/flot.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Purchase</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pages/charts/inline.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Sell</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="pages/charts/uplot.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Stocks</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+
 <li class="nav-item">
     <a href="#" class="nav-link">
       <i class="nav-icon fas fa-tree"></i>
@@ -95,46 +96,24 @@
       </li>
     </ul>
 </li>
-{{-- <li class="nav-item @yield('employee_section')">
-    <a href="#" class="nav-link ">
-      <i class="nav-icon fas fa-table"></i>
-      <p>
-        Employee
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="{{ route('user-list')}}" class="nav-link @yield('employee_list_section')">
-          <i class="far fa-circle nav-icon"></i>
-          <p>List</p>
+
+    <li class="nav-item">
+        <a href="#" class="nav-link">
+        <i class="nav-icon fa fa-book"></i>
+        <p>
+            Expense
+            <i class="right fas fa-angle-left"></i>
+        </p>
         </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ route('create-user')}}" class="nav-link @yield('employee_add_section')">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Add</p>
-        </a>
-      </li>
-    </ul>
-</li> --}}
-<li class="nav-item">
-    <a href="#" class="nav-link">
-      <i class="nav-icon fa fa-book"></i>
-      <p>
-        Expense
-        <i class="right fas fa-angle-left"></i>
-      </p>
-    </a>
-    <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="pages/charts/chartjs.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Expenses</p>
-        </a>
-      </li>
-    </ul>
-</li>
+        <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="pages/charts/chartjs.html" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Expenses</p>
+            </a>
+        </li>
+        </ul>
+    </li>
 
 
     <li class="nav-item @yield('setting_section')">
@@ -161,57 +140,38 @@
                 </p>
                 </a>
             </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <li class="nav-item">
+              <a href="{{ route('departments-list')}}" class="nav-link @yield('departments_section')">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Departments
-                <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>View</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('designations-list')}}" class="nav-link @yield('designations_section')">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Designations
-                <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>View</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('roles-list')}}" class="nav-link @yield('roles_section')">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Roles
-                <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-dot-circle nav-icon"></i>
-                  <p>View</p>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('units-list')}}" class="nav-link @yield('units_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                  Product Units
+                </p>
                 </a>
-              </li>
-            </ul>
-          </li>
+            </li>
         </ul>
     </li>
 

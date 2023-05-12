@@ -9,11 +9,5 @@
 
         </ul>
 
-        @if (Request::is('employee'))
-            <div class="input-group-append" style="margin-right: 0%; margin-left:auto;">
-                <button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#add-employee">Add New Employee</button>
-            </div>
-        @endif
-
     </div>
 </div><!-- /.card-header -->

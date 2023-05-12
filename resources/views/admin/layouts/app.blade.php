@@ -39,20 +39,22 @@
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
             </div>
-            <strong>Copyright &copy; 2017-2023 <a href="https://sortieservices.com">SSPL</a>.</strong> All rights
+            <strong>Copyright &copy; 2017-2023 <a href="https://jayinfraprojects.com">JayInfra Projects</a>.</strong> All rights
             reserved.
         </footer>
 
     </div>
 
 
-
-
     <script src="{{ asset('admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    {{-- <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script> --}}
+    <script src="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
     <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/sparklines/sparkline.js') }}"></script>
     <script src="{{ asset('admin/plugins/moment/moment.min.js') }}"></script>
+
+
     <script src="{{ asset('admin/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
@@ -63,9 +65,6 @@
 
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
-
-    <script src="{{ asset('admin/plugins/datatables.net/jquery.dataTables.js')}}"></script>
-    <script src="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 
 
     @stack('scripts')

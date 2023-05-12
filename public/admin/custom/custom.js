@@ -21,13 +21,17 @@ $('#state_id').on('change', function () {
 });
 
 
+//////////////////////////////////////////////
+////////////  Employee  /////////////////////////
+//////////////////////////////////////////
+
 $(function () {
-    $.validator.setDefaults({
-      submitHandler: function () {
-        // action="{{ route('save-user')}}" method="post"
-        alert( "Form successful submitted!" );
-      }
-    });
+    // $.validator.setDefaults({
+    //   submitHandler: function () {
+    //     // action="{{ route('save-user')}}" method="post"
+    //     alert( "Form successful submitted!" );
+    //   }
+    // });
     $('#add-employee-form').validate({
       rules: {
         name: {
@@ -78,4 +82,404 @@ $(function () {
       }
     });
   });
+
+
+  $(function () {
+
+    var table = $('#user-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "employee/",
+        columns: [
+          {
+              data: "DT_RowIndex",
+              name: "SL No",
+              className: "text-center",
+              orderable: false,
+              searchable: false,
+          },
+            {data: 'Full Name', name: 'Full Name'},
+            {data: 'Email', name: 'Email'},
+            {data: 'Mobile', name: 'Mobile'},
+            {data: 'Gender', name: 'Gender'},
+            {data: 'User Type', name: 'User Type'},
+            {data: 'Address', name: 'Address'},
+            {data: 'City', name: 'City'},
+            {data: 'State', name: 'State'},
+            {data: 'Pincode', name: 'Pincode'},
+            {data: 'Created Date', name: 'Created Date'},
+            {data: 'Status', name: 'Status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+
+  });
+
+
+//////////////////////////////////////////////
+////////////  Roles  /////////////////////////
+//////////////////////////////////////////
+
+  $(function () {
+    $('#add-roles-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#roles-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "roles/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Name', name: 'Name'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
+    // columnDefs: [
+    //     {
+    //         targets: 0, // your case first column
+    //         className: "text-center",
+    //         width: "20%",
+    //     },
+    //     {
+    //         targets: 1, // your case first column
+    //         width: "60%",
+    //     },
+    // ],
+    });
+  });
+
+
+  //////////////////////////////////////////////
+////////////  Units  /////////////////////////
+//////////////////////////////////////////
+
+$(function () {
+    $('#add-units-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+        sku: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+        sku: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#units-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "units/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Name', name: 'Name'},
+        {data: 'Short Name', name: 'Short Name'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
+    // columnDefs: [
+    //     {
+    //         targets: 0, // your case first column
+    //         className: "text-center",
+    //         width: "20%",
+    //     },
+    //     {
+    //         targets: 1, // your case first column
+    //         width: "60%",
+    //     },
+    // ],
+    });
+  });
+
+
+/////////////////////////////////////////////
+////////////  Product Category  /////////////////////////
+//////////////////////////////////////////
+
+$(function () {
+    $('#add-category-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#category-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "category/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Category Name', name: 'Category Name'},
+        {data: 'Sub Category Name', name: 'Sub Category Name'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
+    // columnDefs: [
+    //     {
+    //         targets: 0, // your case first column
+    //         className: "text-center",
+    //         width: "20%",
+    //     },
+    //     {
+    //         targets: 1, // your case first column
+    //         width: "60%",
+    //     },
+    // ],
+    });
+  });
+
+
+
+
+ //sweet alert
+
+
+//////////////////////////////////////////////
+///////Departments/////////////////////////
+//////////////////////////////////////////
+
+$(function () {
+    $('#add-departments-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+
+  $(function () {
+    $('#department-table').DataTable({
+           processing: true,
+           serverSide: true,
+         ajax: "departments/",
+         columns: [
+           {
+               data: "DT_RowIndex",
+               name: "SL No",
+               className: "text-center",
+               orderable: false,
+               searchable: false,
+           },
+             {data: 'Name', name: 'Name'},
+             {data: 'Status', name: 'Status'},
+             {data: 'action', name: 'action', orderable: false, searchable: false},
+         ]
+     });
+
+   });
+
+
+//////////////////////////////////////////////
+///////   Designations/////////////////////////
+//////////////////////////////////////////
+
+   $(function () {
+    $('#add-designations-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+
+    $('#designation-table').DataTable({
+           processing: true,
+           serverSide: true,
+         ajax: "designations/",
+         columns: [
+           {
+               data: "DT_RowIndex",
+               name: "SL No",
+               className: "text-center",
+               orderable: false,
+               searchable: false,
+           },
+             {data: 'Name', name: 'Name'},
+             {data: 'Status', name: 'Status'},
+             {data: 'action', name: 'action', orderable: false, searchable: false},
+         ]
+     });
+
+   });
+
+
+
+
+//sweet alert
+function deleteConfirmation(id,model){
+
+    // var id = id;
+    // if(model=='feature'){
+    //     var url ='';
+    // }else if(model=='amenity'){
+    //     var url ='';
+    // }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-danger ms-1'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                customClass: {
+                confirmButton: 'btn btn-success'
+                }
+            });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+                title: 'Cancelled',
+                text: 'Your imaginary file is safe :)',
+                icon: 'error',
+                customClass: {
+                confirmButton: 'btn btn-success'
+                }
+            });
+            }
+        });
+}
+
 
