@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Employee')
-@section('setting_section', 'menu-open')
-@section('employee_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Employee'] )
+@section('page_title', 'JayInfra Projects | Supplier')
+@section('inventory_section', 'menu-open')
+@section('suppliers_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Supplier'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.employee-nav-header' ,['activeTab' => 'add'])
+                    @include('admin.components.inventory.supplier-nav-header' ,['activeTab' => 'add'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -19,11 +19,11 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
-                            </ul>
+                                </ul>
                             </div>
                         @endif
 
-                        <form id="add-employee-form"  action="{{ route('save-user')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-supplier-form"  action="{{ route('save-suppliers')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                               <div class="row">
@@ -35,7 +35,7 @@
                                   </div>
                                   <div class="col-12 col-sm-6">
                                       <div class="form-group">
-                                          <label for="exampleInputEmail1">Email address*</label>
+                                          <label for="exampleInputEmail1">Business Name*</label>
                                           <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                                       </div>
                                   </div>
@@ -135,8 +135,8 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Employee Type*</label>
-                                        <select class="form-control"  id="employee_type" name="employee_type">
+                                        <label for="exampleInputEmail1">supplier Type*</label>
+                                        <select class="form-control"  id="supplier_type" name="supplier_type">
                                             <option  value="">select</option>
                                             <option value="full time">full time</option>
                                             <option value="contract">contract</option>
@@ -197,11 +197,11 @@
     </div>
 </section>
 
-<div class="modal fade" id="add-employee">
+<div class="modal fade" id="add-supplier">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add Employee</h4>
+          <h4 class="modal-title">Add supplier</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Employee')
-@section('setting_section', 'menu-open')
-@section('employee_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Employee'] )
+@section('page_title', 'JayInfra Projects | Product')
+@section('inventory_section', 'menu-open')
+@section('products_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Product'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.employee-nav-header' ,['activeTab' => 'edit'])
+                    @include('admin.components.inventory.product-nav-header' ,['activeTab' => 'edit'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -19,164 +19,126 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
-                            </ul>
+                                </ul>
                             </div>
                         @endif
 
-                        @if (isset($data['employee']) && $data['employee'] !=null)
-                        <form id="add-employee-form"  action="{{ route('save-user')}}" method="post"  enctype="multipart/form-data">
+                        @if (isset($data['product']) && $data['product'] !=null)
+                        <form id="add-employee-form"  action="{{ route('update-products')}}" method="post"  enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{$data['product']->id}}">
                             <div class="card-body">
-                              <div class="row">
-                                  <div class="col-12 col-sm-6">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Full Name*</label>
-                                          <input type="text" class="form-control" id="name" name="name" value="{{$data['employee']->name}}" placeholder="Enter full name">
-                                      </div>
-                                  </div>
-                                  <div class="col-12 col-sm-6">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Email address*</label>
-                                          <input type="email" class="form-control" id="email" name="email" value="{{$data['employee']->email}}" placeholder="Enter email">
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-12 col-sm-6">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Mobile*</label>
-                                          <input type="number" class="form-control" id="mobile" name="mobile" value="{{$data['employee']->mobile}}" placeholder="Enter mobile">
-                                      </div>
-                                  </div>
-                                  <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Gender*</label>
-                                        <select class="form-control" id="gender" name="gender">
-                                          <option value="M"  {{$data['employee']->gender == 'M' ? 'selected' : '' }}>Male</option>
-                                          <option value="F"  {{$data['employee']->gender == 'F' ? 'selected' : '' }}>Female</option>
-                                        </select>
-                                    </div>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Address*</label>
-                                        <input type="text" class="form-control" id="address" name="address" value="{{$data['employee']->address}}" placeholder="Enter address">
-                                    </div>
-                                </div>
-                            </div>
-                              <div class="row">
-                                  <div class="col-12 col-sm-6">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">State*</label>
-                                            <select class="form-control" id="state_id" name="state_id">
-                                              <option>select</option>
-                                                @foreach ($data['state'] as $state)
-                                                    <option value="{{$state->id}}" {{$data['employee']->state_id == $state->id ? 'selected' : '' }}>{{ $state->name}}</option>
+                                            <label for="exampleInputEmail1">Product Category*</label>
+                                            <select class="form-control" id="product_category_id" name="product_category_id">
+                                                <option>select</option>
+                                                @foreach ($data['category'] as $category)
+                                                    <option value="{{$category->id}}" {{$data['product']->product_category_id == $category->id ? 'selected' : ''}}>{{ $category->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                  </div>
-                                  <div class="col-12 col-sm-6">
+                                    </div>
+                                    <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">City*</label>
-                                            <select class="form-control" id="city_id" name="city_id">
-                                                <option>select state first</option>
-                                                @foreach ($data['city'] as $city)
-                                                    <option value="{{$city->id}}" {{$data['employee']->city_id == $city->id ? 'selected' : '' }}>{{ $city->name}}</option>
+                                            <label for="exampleInputEmail1">Product Name*</label>
+                                            <input type="text" class="form-control" id="name" name="name" value="{{$data['product']->name}}" placeholder="Enter product name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Code </label>
+                                            <input type="number" class="form-control" id="code" name="code" value="{{$data['product']->code}}" placeholder="Enter product code">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Brand </label>
+                                            <select class="form-control" id="brand_id" name="brand_id">
+                                                <option>select</option>
+                                                @foreach ($data['brand'] as $brand)
+                                                    <option value="{{$brand->id}}" {{$data['product']->brand_id == $brand->id ? 'selected' : ''}}>{{ $brand->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-12 col-sm-6">
-                                      <div class="form-group">
-                                          <label for="exampleInputEmail1">Postcode*</label>
-                                          <input type="text" class="form-control" id="postcode" name="postcode" value="{{$data['employee']->postcode}}" placeholder="Enter postcode">
-                                      </div>
-                                  </div>
-                                  <div class="col-12 col-sm-6">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Roles</label>
-                                            <select class="form-control" id="role_id" name="role_id">
-                                              <option value="">select</option>
-                                                @foreach ($data['roles'] as $role)
-                                                    <option value="{{$role->id}}"  {{$data['employee']->role_id == $role->id ? 'selected' : '' }}>{{ $role->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="exampleInputEmail1">Product Size</label>
+                                            <input type="text" class="form-control" id="size" name="size" value="{{$data['product']->size}}" placeholder="Enter Product size">
                                         </div>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Department</label>
-                                        <select class="form-control" id="department_id" name="department_id">
-                                          <option  value="">select</option>
-                                            @foreach ($data['departments'] as $department)
-                                                <option value="{{$department->id}}"  {{$data['employee']->department_id == $department->id ? 'selected' : '' }}>{{ $department->name}}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
-
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Designation</label>
-                                        <select class="form-control" id="designation_id" name="designation_id">
-                                          <option  value="">select</option>
-                                            @foreach ($data['designations'] as $designation)
-                                                <option value="{{$designation->id}}" {{$data['employee']->designation_id == $designation->id ? 'selected' : '' }}>{{ $designation->name}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Product Colour</label>
+                                            <input type="text" class="form-control" id="color" name="color" value="{{$data['product']->color}}" placeholder="Enter Product color">
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Employee Type*</label>
-                                        <select class="form-control"  id="employee_type" name="employee_type">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Model Number</label>
+                                            <input type="text" class="form-control" id="model_no" name="model_no" value="{{$data['product']->model_no}}" placeholder="Enter model number">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Serial Number</label>
+                                            <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{$data['product']->serial_number}}" placeholder="Enter serial number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tax Rate</label>
+                                            <select class="form-control" id="tax_rate_id" name="tax_rate_id">
                                             <option  value="">select</option>
-                                            <option value="full time" {{$data['employee']->employee_type == 'full time' ? 'selected' : '' }}>full time</option>
-                                            <option value="contract" {{$data['employee']->employee_type == 'contract' ? 'selected' : '' }}>contract</option>
-                                            <option value="part time" {{$data['employee']->employee_type == 'part time' ? 'selected' : '' }}>part time</option>
-                                        </select>
+                                                @foreach ($data['tax_rate'] as $tax_rate)
+                                                    <option value="{{$tax_rate->id}}" {{$data['product']->tax_rate_id == $tax_rate->id ? 'selected' : ''}}>{{ $tax_rate->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Hsn Code*</label>
+                                            <input type="text" class="form-control" id="hsn_code" name="hsn_code" value="{{$data['product']->hsn_code}}" placeholder="Enter Product hsn code">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Is Admin</label>
-                                        <select class="form-control" id="is_admin" name="is_admin">
-                                            <option value="1"  {{$data['employee']->is_admin == '1' ? 'selected' : '' }}>Yes</option>
-                                            <option value="0"  {{$data['employee']->is_admin == '0' ? 'selected' : '' }}>No</option>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Description</label>
+                                            <textarea type="text" class="form-control" rows="4" id="description" name="description" placeholder="Enter description">{{$data['product']->description}}</textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="exampleInputFile">Upload Image</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Upload Product Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="avatar" name="avatar">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
                             </div>
 
                             <div class="card-footer">
-                              <button type="submit" class="btn btn-primary">Update</button>
+                              <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </form>
                         @endif

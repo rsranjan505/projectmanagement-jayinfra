@@ -64,9 +64,15 @@ class DepartmentController extends Controller
 
     public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:departments,name',
-        ]);
+        if($request->id !=null){
+            $request->validate([
+                'name' => 'required|unique:departments,name,'.$request->id.',id',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'required|unique:departments,name',
+            ]);
+        }
 
         recordSave(Department::class,$request->all(),null,null);
         if($request->id !=null){

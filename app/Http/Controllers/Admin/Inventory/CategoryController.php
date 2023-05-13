@@ -67,9 +67,15 @@ class CategoryController extends Controller
 
     public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:product_categories,name',
-        ]);
+        if($request->id !=null){
+            $request->validate([
+                'name' => 'required|unique:product_categories,name,'.$request->id.',id',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'required|unique:product_categories,name',
+            ]);
+        }
 
 
         recordSave(ProductCategory::class,$request->all(),null,null);

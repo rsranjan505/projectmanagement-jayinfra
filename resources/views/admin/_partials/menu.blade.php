@@ -29,13 +29,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ route('products-list')}}" class="nav-link @yield('products_section')">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Material</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('suppliers-list')}}" class="nav-link @yield('suppliers_section')">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Suppliers</p>
                 </a>
@@ -164,14 +164,42 @@
               </p>
               </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('units-list')}}" class="nav-link @yield('units_section')">
-                <i class="far fa-circle nav-icon"></i>
+            <li class="nav-item  @yield('products_settings_section')">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fa fa-book"></i>
                 <p>
-                  Product Units
+                    Products Settings
+                    <i class="right fas fa-angle-left"></i>
                 </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('brands-list')}}" class="nav-link @yield('brands_section')">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Brand
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('taxrates-list')}}" class="nav-link @yield('taxrates_section')">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Tax Rate
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('units-list')}}" class="nav-link @yield('units_section')">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Units
+                        </p>
+                        </a>
+                    </li>
+                </ul>
             </li>
+
         </ul>
     </li>
 

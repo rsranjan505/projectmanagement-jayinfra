@@ -62,7 +62,7 @@ class EmployeeController extends Controller
                         return $user->pincode;
                     })
                     ->addColumn('Created Date', function ($user) {
-                        return $user->created_at;
+                        return $user->created_at->format('d-m-Y');
                     })
                     ->addColumn('Status', function ($user) {
                         $status='';
@@ -149,6 +149,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'email' => 'required|unique:users,email,'.$request->id.',id',
             'mobile' =>'required',
             'address' => 'required',
             'state_id' =>'required',

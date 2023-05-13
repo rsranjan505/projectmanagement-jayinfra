@@ -1,33 +1,32 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Employee')
-@section('setting_section', 'menu-open')
-@section('employee_section', 'active')
+@section('page_title', 'JayInfra Projects | Products')
+@section('inventory_section', 'menu-open')
+@section('products_section', 'active')
 
-@include('admin._partials.bredcum',['title'=>'Employee'] )
+@include('admin._partials.bredcum',['title'=>'Products'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.employee-nav-header' ,['activeTab' => 'list'])
+                    @include('admin.components.inventory.product-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table " id="user-table">
+                            <table class="table " id="products-table">
                                 <thead>
                                     <tr>
                                         <th>SL No</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Gender</th>
-                                        <th>User Type</th>
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Pincode</th>
+                                        <th>Product Category</th>
+                                        <th>Product Name</th>
+                                        <th>Brand</th>
+                                        <th>Model No</th>
+                                        <th>Serial No</th>
+                                        <th>Tax Rate</th>
+                                        <th>Hsn Code</th>
+                                        <th>Added By</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>

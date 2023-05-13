@@ -64,9 +64,15 @@ class DesignationController extends Controller
 
     public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:designations,name',
-        ]);
+        if($request->id !=null){
+            $request->validate([
+                'name' => 'required|unique:designations,name,'.$request->id.',id',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'required|unique:designations,name',
+            ]);
+        }
 
         recordSave(Designation::class,$request->all(),null,null);
         if($request->id !=null){

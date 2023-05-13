@@ -64,9 +64,15 @@ class RolesController extends Controller
 
     public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:designations,name',
-        ]);
+        if($request->id !=null){
+            $request->validate([
+                'name' => 'required|unique:roles,name,'.$request->id.',id',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'required|unique:roles,name',
+            ]);
+        }
 
         recordSave(Role::class,$request->all(),null,null);
         if($request->id !=null){

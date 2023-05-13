@@ -3,6 +3,7 @@
 @section('content')
 @section('page_title', 'JayInfra Projects | units')
 @section('setting_section', 'menu-open')
+@section('products_settings_section', 'menu-open')
 @section('units_section', 'active')
 @include('admin._partials.bredcum',['title'=>'units'] )
 
@@ -11,7 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.unit-nav-header' ,['activeTab' => 'list'])
+                    @include('admin.components.settings.unit-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
                         <div class="table table-responsive">
                             <table class="table" id="units-table">
@@ -120,7 +121,7 @@
 <script>
 
      function editModel(id){
-        var url = "/units/edit/" + id;
+        var url = "units/edit/" + id;
             var modelHtml = "";
             $("#edit-units").modal('show');
 

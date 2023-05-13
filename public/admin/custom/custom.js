@@ -240,17 +240,7 @@ $(function () {
         {data: 'Status', name: 'Status'},
         {data: 'action', name: 'action', orderable: false, searchable: false},
     ],
-    // columnDefs: [
-    //     {
-    //         targets: 0, // your case first column
-    //         className: "text-center",
-    //         width: "20%",
-    //     },
-    //     {
-    //         targets: 1, // your case first column
-    //         width: "60%",
-    //     },
-    // ],
+
     });
   });
 
@@ -306,17 +296,119 @@ $(function () {
         {data: 'Status', name: 'Status'},
         {data: 'action', name: 'action', orderable: false, searchable: false},
     ],
-    // columnDefs: [
-    //     {
-    //         targets: 0, // your case first column
-    //         className: "text-center",
-    //         width: "20%",
-    //     },
-    //     {
-    //         targets: 1, // your case first column
-    //         width: "60%",
-    //     },
-    // ],
+
+    });
+  });
+
+
+
+  //Product settings
+  $(function () {
+    $('#add-brands-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#brands-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "brands/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Name', name: 'Name'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
+    });
+  });
+
+
+  //taxrates
+  $(function () {
+    $('#add-taxrates-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+        sku: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+        sku: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#taxrates-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "taxrates/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Name', name: 'Name'},
+        {data: 'Value', name: 'Value'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
     });
   });
 
@@ -434,6 +526,71 @@ $(function () {
      });
 
    });
+
+
+   //////////////////////////////////////////////
+   /////////////    Inventory   ////////////////
+   /////////////////////////////////////////////
+
+
+   //Product entry
+   $(function () {
+    $('#add-products-form').validate({
+      rules: {
+        name: {
+            required: true,
+            name: true,
+        },
+      },
+      messages: {
+        name: {
+            required: "Please enter a name ",
+            name: "Please enter a valid name"
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+
+  $(function () {
+    $('#products-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "products/",
+
+    columns: [
+        {
+            data: "DT_RowIndex",
+            name: "SL No",
+            className: "text-center",
+            orderable: false,
+            searchable: false,
+        },
+        {data: 'Product Category', name: 'Product Category'},
+        {data: 'Product Name', name: 'Product Name'},
+        {data: 'Brand', name: 'Brand'},
+        {data: 'Model No', name: 'Model No'},
+        {data: 'Serial No', name: 'Serial No'},
+        {data: 'Tax Rate', name: 'Tax Rate'},
+        {data: 'Hsn Code', name: 'Hsn Code'},
+        {data: 'Added By', name: 'Added By'},
+        {data: 'Created Date', name: 'Created Date'},
+        {data: 'Status', name: 'Status'},
+        {data: 'action', name: 'action', orderable: false, searchable: false},
+    ],
+
+    });
+  });
 
 
 

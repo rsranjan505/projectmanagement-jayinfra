@@ -6,13 +6,15 @@ use App\Http\Controllers\Admin\Employee\EmployeeController;
 use App\Http\Controllers\Admin\Inventory\CategoryController;
 use App\Http\Controllers\Admin\Inventory\MaterialsController;
 use App\Http\Controllers\Admin\Inventory\SupplierController;
-use App\Http\Controllers\Admin\Settings\UnitController;
+use App\Http\Controllers\Admin\Settings\Products\UnitController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Settings\CompanyProfileController;
 use App\Http\Controllers\Admin\Settings\DepartmentController;
 use App\Http\Controllers\Admin\Settings\DesignationController;
 use App\Http\Controllers\Admin\Settings\GstController;
 use App\Http\Controllers\Admin\Settings\OrganisationController;
+use App\Http\Controllers\Admin\Settings\Products\BrandController;
+use App\Http\Controllers\Admin\Settings\Products\TaxtRateController;
 use App\Http\Controllers\Admin\Settings\RolesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
@@ -40,10 +42,10 @@ Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('units', [UnitController::class, 'index'])->name('units-list');
-Route::get('designations', [DesignationController::class, 'index'])->name('designations-list');
-Route::get('departments', [DepartmentController::class, 'index'])->name('departments-list');
-Route::get('roles', [RolesController::class, 'index'])->name('roles-list');
+// Route::get('units', [UnitController::class, 'index'])->name('units-list');
+// Route::get('designations', [DesignationController::class, 'index'])->name('designations-list');
+// Route::get('departments', [DepartmentController::class, 'index'])->name('departments-list');
+// Route::get('roles', [RolesController::class, 'index'])->name('roles-list');
 
 
 Route::get('/city/{stateId}', [CityController::class, 'showByStateId'])->name('city-list');
@@ -116,6 +118,32 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::get('/change-status/{id}', [GstController::class, 'changeStatus'])->name('gsts-status-change');
     });
 
+    ///Products Settings
+    Route::prefix('settings')->group(function () {
+        Route::prefix('brands')->group(function () {
+            Route::get('/', [BrandController::class, 'index'])->name('brands-list');
+            Route::post('/add', [BrandController::class, 'save'])->name('save-brands');
+            Route::get('/edit/{id?}', [BrandController::class, 'edit'])->name('edit-brands');
+            Route::get('/change-status/{id}', [BrandController::class, 'changeStatus'])->name('brands-status-change');
+        });
+
+        Route::prefix('taxrates')->group(function () {
+            Route::get('/', [TaxtRateController::class, 'index'])->name('taxrates-list');
+            Route::post('/add', [TaxtRateController::class, 'save'])->name('save-taxrates');
+            Route::get('/edit/{id?}', [TaxtRateController::class, 'edit'])->name('edit-taxrates');
+            Route::get('/change-status/{id}', [TaxtRateController::class, 'changeStatus'])->name('taxrates-status-change');
+        });
+
+        Route::prefix('units')->group(function () {
+            Route::get('/', [UnitController::class, 'index'])->name('units-list');
+            Route::post('/add', [UnitController::class, 'save'])->name('save-units');
+            Route::get('/edit/{id?}', [UnitController::class, 'edit'])->name('edit-units');
+            Route::get('/change-status/{id}', [UnitController::class, 'changeStatus'])->name('units-status-change');
+        });
+    });
+
+
+
 
     //INVENTORY MODULE
 
@@ -127,31 +155,27 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::get('/change-status/{id}', [CategoryController::class, 'changeStatus'])->name('category-status-change');
     });
 
-    Route::prefix('units')->group(function () {
-        Route::get('/', [UnitController::class, 'index'])->name('units-list');
-        Route::get('/add', [UnitController::class, 'create'])->name('create-units');
-        Route::post('/add', [UnitController::class, 'save'])->name('save-units');
-        Route::get('/edit/{id?}', [UnitController::class, 'edit'])->name('edit-units');
-        Route::get('/change-status/{id}', [UnitController::class, 'changeStatus'])->name('units-status-change');
+
+    Route::prefix('inventory')->group(function () {
+        Route::prefix('products')->group(function () {
+            Route::get('/', [MaterialsController::class, 'index'])->name('products-list');
+            Route::get('/add', [MaterialsController::class, 'create'])->name('create-products');
+            Route::post('/add', [MaterialsController::class, 'save'])->name('save-products');
+            Route::get('/edit/{id?}', [MaterialsController::class, 'edit'])->name('edit-products');
+            Route::post('/edit', [MaterialsController::class, 'update'])->name('update-products');
+            Route::get('/change-status/{id}', [MaterialsController::class, 'changeStatus'])->name('products-status-change');
+        });
+
+        Route::prefix('suppliers')->group(function () {
+            Route::get('/', [SupplierController::class, 'index'])->name('suppliers-list');
+            Route::get('/add', [SupplierController::class, 'create'])->name('create-suppliers');
+            Route::post('/add', [SupplierController::class, 'save'])->name('save-suppliers');
+            Route::get('/edit/{id?}', [SupplierController::class, 'edit'])->name('edit-suppliers');
+            Route::post('/edit', [SupplierController::class, 'update'])->name('update-suppliers');
+            Route::get('/change-status/{id}', [SupplierController::class, 'changeStatus'])->name('suppliers-status-change');
+        });
     });
 
-    Route::prefix('products')->group(function () {
-        Route::get('/', [MaterialsController::class, 'index'])->name('products-list');
-        Route::get('/add', [MaterialsController::class, 'create'])->name('create-products');
-        Route::post('/add', [MaterialsController::class, 'save'])->name('save-products');
-        Route::get('/edit/{id?}', [MaterialsController::class, 'edit'])->name('edit-products');
-        Route::post('/edit', [MaterialsController::class, 'update'])->name('update-products');
-        Route::get('/change-status/{id}', [MaterialsController::class, 'changeStatus'])->name('products-status-change');
-    });
-
-    Route::prefix('suppliers')->group(function () {
-        Route::get('/', [SupplierController::class, 'index'])->name('suppliers-list');
-        Route::get('/add', [SupplierController::class, 'create'])->name('create-suppliers');
-        Route::post('/add', [SupplierController::class, 'save'])->name('save-suppliers');
-        Route::get('/edit/{id?}', [SupplierController::class, 'edit'])->name('edit-suppliers');
-        Route::post('/edit', [SupplierController::class, 'update'])->name('update-suppliers');
-        Route::get('/change-status/{id}', [SupplierController::class, 'changeStatus'])->name('suppliers-status-change');
-    });
 });
 
 

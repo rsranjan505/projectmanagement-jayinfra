@@ -24,7 +24,7 @@
                         @endif
 
                         @if (isset($data['employee']) && $data['employee'] !=null)
-                        <form id="add-employee-form"  action="{{ route('save-user')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-employee-form"  action="{{ route('update-user')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="id" name="id" value="{{$data['employee']->id}}" >
                             <div class="card-body">

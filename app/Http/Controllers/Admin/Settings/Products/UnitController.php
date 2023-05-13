@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Settings;
+namespace App\Http\Controllers\Admin\Settings\Products;
 
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
@@ -52,7 +52,7 @@ class UnitController extends Controller
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
                         <a class="dropdown-item" onClick="editModel('.$unit->id.')" href="#">Edit</a>
-                        <a class="dropdown-item" href="'.url('units/change-status/'.$unit->id).'">'.$status.'</a>
+                        <a class="dropdown-item" href="'.url('settings/units/change-status/'.$unit->id).'">'.$status.'</a>
 
                         </div>
                     </div>';
@@ -61,15 +61,21 @@ class UnitController extends Controller
             ->rawColumns(['action'])
             ->make(true);
         }
-        return view('admin.pages.settings.units');
+        return view('admin.pages.settings.products.units');
 
     }
 
     public function save(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:units,name',
-        ]);
+        if($request->id !=null){
+            $request->validate([
+                'name' => 'required|unique:units,name,'.$request->id.',id',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'required|unique:units,name',
+            ]);
+        }
 
         recordSave(Unit::class,$request->all(),null,null);
         if($request->id !=null){
@@ -81,18 +87,6 @@ class UnitController extends Controller
     public function edit($id)
     {
         $unit = Unit::find($id);
-        return ok($unit);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $unit =  Unit::find($id);
         return ok($unit);
     }
 

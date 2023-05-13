@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Employee')
-@section('setting_section', 'menu-open')
-@section('employee_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Employee'] )
+@section('page_title', 'JayInfra Projects | Supplier')
+@section('inventory_section', 'menu-open')
+@section('suppliers_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Supplier'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.employee-nav-header' ,['activeTab' => 'edit'])
+                    @include('admin.components.inventory.supplier-nav-header' ,['activeTab' => 'edit'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
