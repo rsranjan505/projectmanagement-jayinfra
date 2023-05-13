@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class OrganisationController extends Controller
 {
     public $data;
+
     public function index()
     {
         $relation = ['state','city','image','gst'];
@@ -28,7 +29,7 @@ class OrganisationController extends Controller
             'name' => 'required|string',
             'display_name' => 'required|string',
             'short_name' => 'required|string',
-            'registration_number' => 'required|string|unique:organisations,email',
+            'registration_number' => 'required|unique:organisations,registration_number',
             'pan' => 'required|string',
             'email' => 'required',
             'mobile' =>'required',

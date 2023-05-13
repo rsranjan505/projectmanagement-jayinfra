@@ -593,6 +593,69 @@ $(function () {
   });
 
 
+     //Supplier entry
+     $(function () {
+        $('#add-suppliers-form').validate({
+          rules: {
+            name: {
+                required: true,
+                name: true,
+            },
+          },
+          messages: {
+            name: {
+                required: "Please enter a name ",
+                name: "Please enter a valid name"
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+
+      $(function () {
+        $('#suppliers-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "suppliers/",
+
+        columns: [
+            {
+                data: "DT_RowIndex",
+                name: "SL No",
+                className: "text-center",
+                orderable: false,
+                searchable: false,
+            },
+            {data: 'Contact Name', name: 'Contact Name'},
+            {data: 'Business Name', name: 'Business Name'},
+            {data: 'Registration Number', name: 'Registration Number'},
+            {data: 'Pan', name: 'Pan'},
+            {data: 'Email', name: 'Email'},
+            {data: 'Mobile', name: 'Mobile'},
+            {data: 'Address', name: 'Address'},
+            {data: 'City', name: 'City'},
+            {data: 'State', name: 'State'},
+            {data: 'Postcode', name: 'Postcode'},
+            {data: 'Added By', name: 'Added By'},
+            {data: 'Created Date', name: 'Created Date'},
+            {data: 'Status', name: 'Status'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ],
+
+        });
+      });
+
+
 
 
 //sweet alert

@@ -164,14 +164,14 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Pan Number*</label>
-                                        <input type="text" class="form-control" id="pan" name="pan" value="{{$data['org'] !=null ? $data['org']->pan : ''}}" placeholder="Enter Short name">
+                                        <input type="text" class="form-control" id="pan" name="pan" value="{{$data['org'] !=null ? $data['org']->pan : ''}}" placeholder="Enter Pan Number">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Mobile Numaber*</label>
+                                        <label for="exampleInputEmail1">Mobile Number*</label>
                                         <input type="number" class="form-control" id="mobile" name="mobile" value="{{$data['org'] !=null ? $data['org']->mobile : ''}}" placeholder="Enter Mobile Numaber">
                                     </div>
                                 </div>

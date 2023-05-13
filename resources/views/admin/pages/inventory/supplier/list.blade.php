@@ -18,15 +18,17 @@
                                 <thead>
                                     <tr>
                                         <th>SL No</th>
-                                        <th>Full Name</th>
+                                        <th>Contact Name</th>
+                                        <th>Business Name</th>
+                                        <th>Registration Number</th>
+                                        <th>Pan</th>
                                         <th>Email</th>
                                         <th>Mobile</th>
-                                        <th>Gender</th>
-                                        <th>User Type</th>
                                         <th>Address</th>
                                         <th>City</th>
                                         <th>State</th>
-                                        <th>Pincode</th>
+                                        <th>Postcode</th>
+                                        <th>Added By</th>
                                         <th>Created Date</th>
                                         <th>Status</th>
                                         <th>Action</th>
