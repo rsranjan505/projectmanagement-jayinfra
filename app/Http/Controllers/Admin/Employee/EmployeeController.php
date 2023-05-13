@@ -111,7 +111,7 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|unique:users,email',
-            'phone' =>'required',
+            'mobile' =>'required',
             'address' => 'required',
             'state_id' =>'required',
             'city_id' =>'required',
@@ -143,6 +143,29 @@ class EmployeeController extends Controller
         $this->data['city'] = City::all();
         $this->data['employee'] = User::find($id);
         return view('admin.pages.settings.employee.edit',['data' => $this->data]);
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'mobile' =>'required',
+            'address' => 'required',
+            'state_id' =>'required',
+            'city_id' =>'required',
+            'postcode' =>'required',
+        ]);
+
+        $data = $request->except(['avatar']);
+
+        $user = recordSave(User::class,$data,null,null);
+        if($request->avatar !=null){
+            $image = fileUpload($request->avatar,$user,'local');
+            $image['document_type']='avatar';
+            $user->image()->create($image);
+        }
+
+        return redirect()->back()->with(['success'=>'Employee Has been updated successfully.']);
     }
 
     public function changeStatus($id)

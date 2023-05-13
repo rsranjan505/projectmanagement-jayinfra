@@ -70,7 +70,7 @@ a {
     <div class="col-md-12">
       <div class="main-icon text-success"><span class="uxicon uxicon-clock-refresh"></span></div>
       <h1>Future home of something quite cool.</h1>
-      <p class="lead">If you're the <strong>site owner</strong>, <a href="/cpanel">log in</a> to launch this site</p>
+      <p class="lead">If you're the <strong>site owner</strong>, <a href="{{url('login')}}">log in</a> to launch this site</p>
       <p class="lead">If you are a <strong>visitor</strong>, check back soon.</p>
     </div>
   </div>

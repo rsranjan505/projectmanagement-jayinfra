@@ -150,19 +150,11 @@
                   </form>
                 </div>
                 <div class="tab-pane" id="edit">
-                    @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                            </ul>
-                            </div>
-                        @endif
 
                         @if (isset($data['employee']) && $data['employee'] !=null)
-                        <form id="add-employee-form"  action="{{ route('save-user')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-employee-form"  action="{{ route('update-profile')}}" method="post"  enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" id="id" name="id" value="{{$data['employee']->id}}" >
                             <div class="card-body">
                               <div class="row">
                                   <div class="col-12 col-sm-6">

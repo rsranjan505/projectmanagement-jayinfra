@@ -29,14 +29,35 @@ class ProfileController extends Controller
         return view('admin.pages.profile.view',['data'=>$this->data]);
     }
 
-    public function create()
+    public function update(Request $request)
     {
-        return view('admin.pages.employee.add');
-    }
+        $request->validate([
+            'name' => 'required|string',
+            'mobile' =>'required',
+            'address' => 'required',
+            'state_id' =>'required',
+            'city_id' =>'required',
+            'postcode' =>'required',
+        ]);
 
-    public function edit($id)
-    {
-        return view('admin.pages.employee.edit');
+        $data = $request->except(['avatar']);
+
+        $user = recordSave(User::class,$data,null,null);
+        if($request->avatar !=null){
+            $image = fileUpload($request->avatar,$user,'local');
+            $image['document_type']='avatar';
+            $user->image()->create($image);
+        }
+
+        $relation = ['department','designation','role','state','city','image'];
+        $this->data['roles'] = Role::all();
+        $this->data['departments'] = Department::all();
+        $this->data['designations'] = Designation::all();
+        $this->data['state'] = State::all();
+        $this->data['city'] = City::all();
+        $this->data['employee'] = User::where('id',auth()->user()->id)->with($relation)->first();
+
+        return view('admin.pages.profile.view',['data'=>$this->data])->with(['success'=>'Employee Has been updated successfully.']);
     }
 
     public function changePassword(Request $request)
