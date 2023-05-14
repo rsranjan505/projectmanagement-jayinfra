@@ -35,8 +35,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-
 //Admin Section
 Auth::routes();
 
