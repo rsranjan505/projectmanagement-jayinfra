@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\Inventory\MaterialsController;
 use App\Http\Controllers\Admin\Inventory\SupplierController;
 use App\Http\Controllers\Admin\Settings\Products\UnitController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Project\Location\BlockController;
+use App\Http\Controllers\Admin\Project\Location\DistrictController;
+use App\Http\Controllers\Admin\Project\Location\PanchayatController;
+use App\Http\Controllers\Admin\Project\Location\VillageController;
 use App\Http\Controllers\Admin\Settings\CompanyProfileController;
 use App\Http\Controllers\Admin\Settings\DepartmentController;
 use App\Http\Controllers\Admin\Settings\DesignationController;
@@ -171,6 +175,41 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             Route::get('/edit/{id?}', [SupplierController::class, 'edit'])->name('edit-suppliers');
             Route::post('/edit', [SupplierController::class, 'update'])->name('update-suppliers');
             Route::get('/change-status/{id}', [SupplierController::class, 'changeStatus'])->name('suppliers-status-change');
+        });
+    });
+
+
+     //Project MODULE
+
+     Route::prefix('project')->group(function () {
+        Route::prefix('location')->group(function () {
+            Route::prefix('districts')->group(function () {
+                Route::get('/', [DistrictController::class, 'index'])->name('districts-list');
+                Route::post('/add', [DistrictController::class, 'save'])->name('save-districts');
+                Route::get('/edit/{id?}', [DistrictController::class, 'edit'])->name('edit-districts');
+                Route::get('/change-status/{id}', [DistrictController::class, 'changeStatus'])->name('districts-status-change');
+            });
+
+            Route::prefix('blocks')->group(function () {
+                Route::get('/', [BlockController::class, 'index'])->name('blocks-list');
+                Route::post('/add', [BlockController::class, 'save'])->name('save-blocks');
+                Route::get('/edit/{id?}', [BlockController::class, 'edit'])->name('edit-blocks');
+                Route::get('/change-status/{id}', [BlockController::class, 'changeStatus'])->name('blocks-status-change');
+            });
+
+            Route::prefix('panchayats')->group(function () {
+                Route::get('/', [PanchayatController::class, 'index'])->name('panchayats-list');
+                Route::post('/add', [PanchayatController::class, 'save'])->name('save-panchayats');
+                Route::get('/edit/{id?}', [PanchayatController::class, 'edit'])->name('edit-panchayats');
+                Route::get('/change-status/{id}', [PanchayatController::class, 'changeStatus'])->name('panchayats-status-change');
+            });
+
+            Route::prefix('villages')->group(function () {
+                Route::get('/', [VillageController::class, 'index'])->name('villages-list');
+                Route::post('/add', [VillageController::class, 'save'])->name('save-villages');
+                Route::get('/edit/{id?}', [VillageController::class, 'edit'])->name('edit-villages');
+                Route::get('/change-status/{id}', [VillageController::class, 'changeStatus'])->name('villages-status-change');
+            });
         });
     });
 

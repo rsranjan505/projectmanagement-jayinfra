@@ -94,6 +94,49 @@
           <p>Projects Scheme</p>
         </a>
       </li>
+      <li class="nav-item  @yield('project_location_section')">
+        <a href="#" class="nav-link">
+        <i class="nav-icon fa fa-book"></i>
+        <p>
+            Project Location
+            <i class="right fas fa-angle-left"></i>
+        </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('districts-list')}}" class="nav-link @yield('districts_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Districts
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('blocks-list')}}" class="nav-link @yield('blocks_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Blocks
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('panchayats-list')}}" class="nav-link @yield('panchayats_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Panchayats
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('villages-list')}}" class="nav-link @yield('villages_section')">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                    Villages
+                </p>
+                </a>
+            </li>
+        </ul>
+       </li>
     </ul>
 </li>
 

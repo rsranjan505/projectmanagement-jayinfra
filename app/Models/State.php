@@ -14,4 +14,9 @@ class State extends Model
     public function country(){
         return $this->belongsTo(Country::class,'country_id');
     }
+
+    public function district()
+    {
+        return $this->hasMany(District::class,'state_id')->where('is_active', 1)->orderBy('name');
+    }
 }

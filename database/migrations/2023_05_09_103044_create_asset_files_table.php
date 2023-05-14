@@ -24,7 +24,7 @@ return new class extends Migration
             $table->smallInteger('height')->nullable(true);
             $table->string('url');
             $table->string('original_name');
-            $table->string('created_by');
+            $table->unsignedBigInteger('created_by');
             $table->tinyInteger('is_active')->default(1);
             $table->timestamp('created_at')->nullable();
 			$table->timestamp('updated_at')->nullable();

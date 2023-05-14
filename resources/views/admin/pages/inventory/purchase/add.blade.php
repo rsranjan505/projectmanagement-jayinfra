@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Purchase')
+@section('page_title', 'JayInfra Projects | Product')
 @section('inventory_section', 'menu-open')
-@section('purchases_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Purchase'] )
+@section('products_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Product'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'add'])
+                    @include('admin.components.inventory.product-nav-header' ,['activeTab' => 'add'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form id="add-employee-form"  action="{{ route('save-purchases')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-employee-form"  action="{{ route('save-products')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
