@@ -1,7 +1,7 @@
 @extends('landing.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Home')
+@section('page_title', 'Jay Infra Projects | Home')
 
 {{-- <section id="ts-features" class="ts-features pb-2">
     <div class="container">

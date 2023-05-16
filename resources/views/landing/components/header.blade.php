@@ -39,7 +39,7 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu" role="menu">
-                              <li><a href="news-left-sidebar.html">Gelary</a></li>
+                              <li><a href="news-left-sidebar.html">Gallery</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>

@@ -61,7 +61,7 @@
         </ul>
     </li>
 
-<li class="nav-item">
+<li class="nav-item @yield('project_section')">
     <a href="#" class="nav-link">
       <i class="nav-icon fas fa-tree"></i>
       <p>
