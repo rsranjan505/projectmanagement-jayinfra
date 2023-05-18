@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Block extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'district_id','code','is_active'];
+	protected $dates = ['created_at', 'updated_at'];
 
     public function district()
     {

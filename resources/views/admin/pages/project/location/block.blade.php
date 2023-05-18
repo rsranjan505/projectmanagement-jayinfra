@@ -15,11 +15,10 @@
                     @include('admin.components.project.location.block-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table " id="blocks-table">
+                            <table class="table " id="block-table">
                                 <thead>
                                     <tr>
                                         <th>SL No</th>
-                                        <th>State Name</th>
                                         <th>District Name</th>
                                         <th>Code</th>
                                         <th>Block Name</th>
@@ -40,35 +39,46 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add blocks</h4>
+          <h4 class="modal-title">Add block</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body" >
-            <form id="add-blocks-form"  action="{{ route('save-blockss')}}" method="post"  enctype="multipart/form-data">
+            <form id="add-block-form"  action="{{ route('save-blocks')}}" method="post"  enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Name*</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Parent blocks</label>
-                                <select class="form-control" id="parrent_id" name="parrent_id">
-                                    <option value="">Select</option>
-                                    @foreach ($blocks as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                <label for="exampleInputEmail1">Select district</label>
+                                <select class="form-control  @error('district_id') is-invalid @enderror" id="district_id" name="district_id">
+                                    <option value="">Select district</option>
+                                    @foreach ($districts as $district)
+                                        <option value="{{$district->id}}">{{$district->name}}</option>
                                     @endforeach
 
                                 </select>
                             </div>
+                            @error('district_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name*</label>
+                                <input type="text" class="form-control  @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter name">
+                            </div>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- <div class="col-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Is Active</label>
                                 <select class="form-control" id="is_active" name="is_active">
@@ -76,7 +86,7 @@
                                     <option value="0">No</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-footer">
@@ -98,15 +108,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add blocks</h4>
+          <h4 class="modal-title">Add block</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <form id="edit-blocks-form"  action="{{ route('save-blockss')}}" method="post"  enctype="multipart/form-data">
+            <form id="edit-block-form"  action="{{ route('save-blocks')}}" method="post"  enctype="multipart/form-data">
                 @csrf
-                <div class="card-body" id="getblocks">
+                <div class="card-body" id="getblock">
 
                 </div>
                 <div class="card-footer">
@@ -129,7 +139,7 @@
 <script>
 
      function editModel(id){
-        var url = "/blocks/edit/" + id;
+        var url = "blocks/edit/" + id;
             var modelHtml = "";
             $("#edit-block").modal('show');
 
@@ -137,11 +147,11 @@
                 url: url,
                 type: "get",
                 success: function (res) {
+                    console.log(res.data.district.id);
+                    let html = '<div class="row"><input type="hidden" class="form-control" id="id" name="id" value="'+res.data.id+'"><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">State Name*</label><select class="form-control" id="district_id" name="district_id"><option value="'+res.data.district.id+'">'+res.data.district.name+'</option></select></div></div><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Name*</label><input type="text" class="form-control" id="name" name="name" value="'+res.data.name+'"></div></div></div>';
 
-                    let html = '<div class="row"><input type="hidden" class="form-control" id="id" name="id" value="'+res.data.id+'"><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Name*</label><input type="text" class="form-control" id="name" name="name" value="'+res.data.name+'"></div></div><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Is Active</label> <select class="form-control" id="is_active" name="is_active"><option value="1">Yes</option><option value="0">No</option></select></div></div></div>';
-
-                    $("#getblocks").html("");
-                    $("#getblocks").html(html);
+                    $("#getblock").html("");
+                    $("#getblock").html(html);
                 },
             });
 

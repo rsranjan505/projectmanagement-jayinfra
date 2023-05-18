@@ -51,23 +51,34 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Name*</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Parent district</label>
-                                <select class="form-control" id="parrent_id" name="parrent_id">
-                                    <option value="">Select</option>
-                                    @foreach ($district as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                <label for="exampleInputEmail1">Select state</label>
+                                <select class="form-control  @error('state_id') is-invalid @enderror" id="state_id" name="state_id">
+                                    <option value="">Select state</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
 
                                 </select>
                             </div>
+                            @error('state_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="col-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name*</label>
+                                <input type="text" class="form-control  @error('state_id') is-invalid @enderror" id="name" name="name" placeholder="Enter name">
+                            </div>
+                            @error('state_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- <div class="col-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Is Active</label>
                                 <select class="form-control" id="is_active" name="is_active">
@@ -75,7 +86,7 @@
                                     <option value="0">No</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="card-footer">
@@ -128,7 +139,7 @@
 <script>
 
      function editModel(id){
-        var url = "/districts/edit/" + id;
+        var url = "districts/edit/" + id;
             var modelHtml = "";
             $("#edit-district").modal('show');
 
@@ -136,8 +147,8 @@
                 url: url,
                 type: "get",
                 success: function (res) {
-
-                    let html = '<div class="row"><input type="hidden" class="form-control" id="id" name="id" value="'+res.data.id+'"><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Name*</label><input type="text" class="form-control" id="name" name="name" value="'+res.data.name+'"></div></div><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Is Active</label> <select class="form-control" id="is_active" name="is_active"><option value="1">Yes</option><option value="0">No</option></select></div></div></div>';
+                    console.log(res.data.state.id);
+                    let html = '<div class="row"><input type="hidden" class="form-control" id="id" name="id" value="'+res.data.id+'"><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">State Name*</label><select class="form-control" id="state_id" name="state_id"><option value="'+res.data.state.id+'">'+res.data.state.name+'</option></select></div></div><div class="col-12"><div class="form-group"><label for="exampleInputEmail1">Name*</label><input type="text" class="form-control" id="name" name="name" value="'+res.data.name+'"></div></div></div>';
 
                     $("#getdistrict").html("");
                     $("#getdistrict").html(html);

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Panchayat extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'block_id','code','is_active'];
+	protected $dates = ['created_at', 'updated_at'];
 
     public function block()
     {

@@ -657,6 +657,256 @@ $(function () {
 
 
 
+    ////////////////////////////////////////////////////////
+    ////////////// project Location /////////////////////
+
+    //District
+    $(function () {
+        $('#add-district-form').validate({
+          rules: {
+            state_id: {
+                required: true,
+                state_id: true,
+            },
+            name: {
+                required: true,
+                name: true,
+            },
+          },
+          messages: {
+            state_id: {
+                required: "Please enter a name ",
+                state_id: "Please enter a state name"
+            },
+            name: {
+                required: "Please enter a name ",
+                name: "Please enter a valid name"
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+
+      $(function () {
+
+        $('#district-table').DataTable({
+               processing: true,
+               serverSide: true,
+             ajax: "districts/",
+             columns: [
+               {
+                   data: "DT_RowIndex",
+                   name: "SL No",
+                   className: "text-center",
+                   orderable: false,
+                   searchable: false,
+               },
+                 {data: 'State Name', name: 'State Name'},
+                 {data: 'Code', name: 'Code'},
+                 {data: 'District Name', name: 'District Name'},
+                 {data: 'Status', name: 'Status'},
+                 {data: 'action', name: 'action', orderable: false, searchable: false},
+             ]
+         });
+
+       });
+
+    //Block
+    $(function () {
+        $('#add-block-form').validate({
+          rules: {
+            district_id: {
+                required: true,
+                state_id: true,
+            },
+            name: {
+                required: true,
+                name: true,
+            },
+          },
+          messages: {
+            district_id: {
+                required: "Please enter a name ",
+                district_id: "Please enter a state name"
+            },
+            name: {
+                required: "Please enter a name ",
+                name: "Please enter a valid name"
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+
+      $(function () {
+
+        $('#block-table').DataTable({
+               processing: true,
+               serverSide: true,
+             ajax: "blocks/",
+             columns: [
+               {
+                   data: "DT_RowIndex",
+                   name: "SL No",
+                   className: "text-center",
+                   orderable: false,
+                   searchable: false,
+               },
+                 {data: 'District Name', name: 'District Name'},
+                 {data: 'Code', name: 'Code'},
+                 {data: 'Block Name', name: 'Block Name'},
+                 {data: 'Status', name: 'Status'},
+                 {data: 'action', name: 'action', orderable: false, searchable: false},
+             ]
+         });
+
+       });
+
+    //Panchayats
+    $(function () {
+        $('#add-panchayat-form').validate({
+          rules: {
+           block_id: {
+                required: true,
+                state_id: true,
+            },
+            name: {
+                required: true,
+                name: true,
+            },
+          },
+          messages: {
+            block_id: {
+                required: "Please enter a name ",
+                block_id: "Please enter a state name"
+            },
+            name: {
+                required: "Please enter a name ",
+                name: "Please enter a valid name"
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+
+      $(function () {
+
+        $('#panchayat-table').DataTable({
+               processing: true,
+               serverSide: true,
+             ajax: "panchayats/",
+             columns: [
+               {
+                   data: "DT_RowIndex",
+                   name: "SL No",
+                   className: "text-center",
+                   orderable: false,
+                   searchable: false,
+               },
+                 {data: 'District Name', name: 'District Name'},
+                 {data: 'Block Name', name: 'Block Name'},
+                 {data: 'Code', name: 'Code'},
+                 {data: 'Panchayat Name', name: 'Panchayat Name'},
+                 {data: 'Status', name: 'Status'},
+                 {data: 'action', name: 'action', orderable: false, searchable: false},
+             ]
+         });
+
+       });
+
+
+    //Villages
+    $(function () {
+        $('#add-village-form').validate({
+          rules: {
+           panchayat_id: {
+                required: true,
+                state_id: true,
+            },
+            name: {
+                required: true,
+                name: true,
+            },
+          },
+          messages: {
+            panchayat_id: {
+                required: "Please enter a name ",
+                panchayat_id: "Please enter a state name"
+            },
+            name: {
+                required: "Please enter a name ",
+                name: "Please enter a valid name"
+            },
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      });
+
+      $(function () {
+
+        $('#village-table').DataTable({
+               processing: true,
+               serverSide: true,
+             ajax: "villages/",
+             columns: [
+               {
+                   data: "DT_RowIndex",
+                   name: "SL No",
+                   className: "text-center",
+                   orderable: false,
+                   searchable: false,
+               },
+                 {data: 'District Name', name: 'District Name'},
+                 {data: 'Block Name', name: 'Block Name'},
+                 {data: 'Panchayat Name', name: 'Panchayat Name'},
+                 {data: 'Village Name', name: 'Village Name'},
+                 {data: 'Status', name: 'Status'},
+                 {data: 'action', name: 'action', orderable: false, searchable: false},
+             ]
+         });
+
+       });
+
 
 //sweet alert
 function deleteConfirmation(id,model){
