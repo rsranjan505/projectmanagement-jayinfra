@@ -38,9 +38,9 @@ class BlockController extends Controller
             ->addColumn('Status', function ($block) {
                 $status='';
                 if($block->is_active ==1){
-                    $status ='Active';
+                    $status ='<span class="badge bg-success">Active</span>';
                 }else{
-                    $status= 'Deactive';
+                    $status= '<span class="badge bg-danger">Deactive</span>';
                 }
                 return $status;
             })
@@ -62,7 +62,7 @@ class BlockController extends Controller
                     </div>';
 
             })
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action','Status'])
             ->make(true);
         }
         return view('admin.pages.project.location.block',['districts' => $districts]);

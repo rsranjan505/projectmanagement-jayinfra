@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Roles')
+@section('page_title', 'Jay Infra Projects | Roles')
 @section('setting_section', 'menu-open')
 @section('roles_section', 'active')
 @include('admin._partials.bredcum',['title'=>'roles'] )

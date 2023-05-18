@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | departments')
+@section('page_title', 'Jay Infra Projects | departments')
 @section('setting_section', 'menu-open')
 @section('departments_section', 'active')
 @include('admin._partials.bredcum',['title'=>'departments'] )

@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('page_title', 'JayInfra Projects | Profile')
+@section('page_title', 'Jay Infra Projects | Profile')
 @section('setting_section', 'menu-open')
 @section('business_profile_section', 'active')
 

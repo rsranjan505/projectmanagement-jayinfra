@@ -41,9 +41,9 @@ class PanchayatController extends Controller
             ->addColumn('Status', function ($panchayat) {
                 $status='';
                 if($panchayat->is_active ==1){
-                    $status ='Active';
+                    $status ='<span class="badge bg-success">Active</span>';
                 }else{
-                    $status= 'Deactive';
+                    $status= '<span class="badge bg-danger">Deactive</span>';
                 }
                 return $status;
             })
@@ -65,7 +65,7 @@ class PanchayatController extends Controller
                     </div>';
 
             })
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action','Status'])
             ->make(true);
         }
         return view('admin.pages.project.location.panchayat',['blocks' => $blocks]);

@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('purchases-list')}}" class="nav-link @yield('purchase_section')">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Purchase</p>
                 </a>

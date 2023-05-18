@@ -41,9 +41,9 @@ class VillageController extends Controller
             ->addColumn('Status', function ($village) {
                 $status='';
                 if($village->is_active ==1){
-                    $status ='Active';
+                    $status ='<span class="badge bg-success">Active</span>';
                 }else{
-                    $status= 'Deactive';
+                    $status= '<span class="badge bg-danger">Deactive</span>';
                 }
                 return $status;
             })
@@ -65,7 +65,7 @@ class VillageController extends Controller
                     </div>';
 
             })
-            ->rawColumns(['action','status'])
+            ->rawColumns(['action','Status'])
             ->make(true);
         }
         return view('admin.pages.project.location.village',['panchayats' => $panchayats]);

@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Products')
+@section('page_title', 'Jay Infra Projects | Purchase')
 @section('inventory_section', 'menu-open')
-@section('products_section', 'active')
+@section('purchase_section', 'active')
 
-@include('admin._partials.bredcum',['title'=>'Products'] )
+@include('admin._partials.bredcum',['title'=>'Purchase'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.inventory.product-nav-header' ,['activeTab' => 'list'])
+                    @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table " id="products-table">

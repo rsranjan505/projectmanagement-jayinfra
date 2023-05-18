@@ -1,10 +1,10 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Product')
+@section('page_title', 'Jay Infra Projects | Purchase')
 @section('inventory_section', 'menu-open')
-@section('products_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Product'] )
+@section('purchase_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Purchase'] )
 
 <section class="content">
     <div class="container-fluid">
@@ -28,24 +28,128 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
+
+                                    </div>
+                                    <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Category*</label>
-                                            <select class="form-control" id="product_category_id" name="product_category_id">
+                                            <label for="exampleInputEmail1">Select Supplier*</label>
+                                            <select class="form-control" id="supplier_id" name="supplier_id">
                                                 <option>select</option>
-                                                @foreach ($data['category'] as $category)
-                                                    <option value="{{$category->id}}">{{ $category->name}}</option>
+                                                @foreach ($data['suppliers'] as $supplier)
+                                                    <option value="{{$supplier->id}}">{{ $supplier->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Name*</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
+                                            <label for="exampleInputEmail1">Invoice Number</label>
+                                            <input type="text" class="form-control" id="invoice_number" name="size" placeholder="Enter invoice number">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Invoice Date</label>
+                                            <input type="date" class="form-control" id="invoice_date" name="invoice_date" placeholder="Enter invoice date">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-12 table-responsive">
+                                      <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                          <th>SN</th>
+                                          <th>Product</th>
+                                          <th>Qty</th>
+                                          <th>Unit</th>
+                                          <th>Unit Price(&#8377;)</th>
+                                          <th>Subtotal(&#8377;)</th>
+                                          <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr id="item_row">
+                                          {{-- <td>1</td>
+                                          <td>Call of Duty</td>
+                                          <td>455-981-221</td>
+                                          <td>El snort testosterone trophy driving gloves handsome</td>
+                                          <td>$64.50</td> --}}
+                                        </tr>
+
+                                        <tr>
+                                          <td>1</td>
+                                            <td>
+                                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                                    <option>select</option>
+                                                    @foreach ($data['products'] as $product)
+                                                        <option value="{{$product->id}}">{{ $product->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter invoice date"></td>
+                                            <td>
+                                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                                <option>select</option>
+                                                    @foreach ($data['units'] as $unit)
+                                                        <option value="{{$unit->id}}">{{ $unit->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                          <td>$25.99</td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <!-- /.col -->
+                                  </div>
+                                <hr>
+                                  <div class="row">
+                                    <!-- accepted payments column -->
+                                    <div class="col-6">
+                                      <p class="lead">Payment Methods:</p>
+                                      {{-- <img src="../../dist/img/credit/visa.png" alt="Visa">
+                                      <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                                      <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                                      <img src="../../dist/img/credit/paypal2.png" alt="Paypal"> --}}
+
+                                      {{-- <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
+                                        plugg
+                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                                      </p> --}}
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-6">
+                                      <p class="lead">Amount Due 2/22/2014</p>
+
+                                      <div class="table-responsive">
+                                        <table class="table">
+                                          <tr>
+                                            <th style="width:50%">Subtotal:</th>
+                                            <td>$250.30</td>
+                                          </tr>
+                                          <tr>
+                                            <th>Tax (9.3%)</th>
+                                            <td>$10.34</td>
+                                          </tr>
+                                          <tr>
+                                            <th>Shipping:</th>
+                                            <td>$5.80</td>
+                                          </tr>
+                                          <tr>
+                                            <th>Total:</th>
+                                            <td>$265.24</td>
+                                          </tr>
+                                        </table>
+                                      </div>
+                                    </div>
+                                    <!-- /.col -->
+                                  </div>
+                                {{-- <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Product Code </label>
@@ -112,27 +216,8 @@
                                             <input type="text" class="form-control" id="hsn_code" name="hsn_code" placeholder="Enter Product hsn code">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Description</label>
-                                            <textarea type="text" class="form-control" rows="4" id="description" name="description" placeholder="Enter description"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Upload Product Image</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> --}}
+
                             </div>
 
                             <div class="card-footer">

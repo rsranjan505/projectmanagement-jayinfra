@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Purchase')
+@section('page_title', 'Jay Infra Projects | Purchase')
 @section('inventory_section', 'menu-open')
 @section('purchases_section', 'active')
 @include('admin._partials.bredcum',['title'=>'Purchase'] )

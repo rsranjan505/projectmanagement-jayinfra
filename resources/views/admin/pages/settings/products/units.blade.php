@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | units')
+@section('page_title', 'Jay Infra Projects | units')
 @section('setting_section', 'menu-open')
 @section('products_settings_section', 'menu-open')
 @section('units_section', 'active')

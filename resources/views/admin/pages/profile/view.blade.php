@@ -2,7 +2,7 @@
 
 @section('content')
 
-@section('page_title', 'JayInfra Projects | Profile')
+@section('page_title', 'Jay Infra Projects | Profile')
 @section('profile_section', 'menu-open')
 
 @include('admin._partials.bredcum',['title'=>'Profile'] )

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | TaxRate')
+@section('page_title', 'Jay Infra Projects | TaxRate')
 @section('setting_section', 'menu-open')
 @section('products_settings_section', 'menu-open')
 @section('taxrates_section', 'active')

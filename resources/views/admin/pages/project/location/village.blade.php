@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | Village')
+@section('page_title', 'Jay Infra Projects | Village')
 @section('project_section', 'menu-open')
 @section('project_location_section', 'menu-open')
 @section('villages_section', 'active')

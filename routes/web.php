@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Employee\EmployeeController;
 use App\Http\Controllers\Admin\Inventory\CategoryController;
 use App\Http\Controllers\Admin\Inventory\MaterialsController;
+use App\Http\Controllers\Admin\Inventory\PurchaseController;
 use App\Http\Controllers\Admin\Inventory\SupplierController;
 use App\Http\Controllers\Admin\Settings\Products\UnitController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -175,6 +176,15 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             Route::get('/edit/{id?}', [SupplierController::class, 'edit'])->name('edit-suppliers');
             Route::post('/edit', [SupplierController::class, 'update'])->name('update-suppliers');
             Route::get('/change-status/{id}', [SupplierController::class, 'changeStatus'])->name('suppliers-status-change');
+        });
+
+        Route::prefix('purchases')->group(function () {
+            Route::get('/', [PurchaseController::class, 'index'])->name('purchases-list');
+            Route::get('/add', [PurchaseController::class, 'create'])->name('create-purchases');
+            Route::post('/add', [PurchaseController::class, 'save'])->name('save-purchases');
+            Route::get('/edit/{id?}', [PurchaseController::class, 'edit'])->name('edit-purchases');
+            Route::post('/edit', [PurchaseController::class, 'update'])->name('update-purchases');
+            Route::get('/change-status/{id}', [PurchaseController::class, 'changeStatus'])->name('purchases-status-change');
         });
     });
 

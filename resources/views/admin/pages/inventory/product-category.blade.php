@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'JayInfra Projects | category')
+@section('page_title', 'Jay Infra Projects | category')
 @section('inventory_section', 'menu-open')
 @section('category_section', 'active')
 @include('admin._partials.bredcum',['title'=>'category'] )

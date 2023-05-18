@@ -39,7 +39,7 @@
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
             </div>
-            <strong>Copyright &copy; 2017-2023 <a href="https://jayinfraprojects.com">Jay Infra Projects</a>.</strong> All rights
+            <strong>Copyright &copy; 2017-2023 <a href="https://Jay Infraprojects.com">Jay Infra Projects</a>.</strong> All rights
             reserved.
         </footer>
 
