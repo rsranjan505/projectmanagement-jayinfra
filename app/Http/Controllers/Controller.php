@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StockItem;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -24,4 +25,40 @@ class Controller extends BaseController
         $this->page['contact_number'] = '';
         return $this->page;
     }
+
+
+    public function updateStockItems($data=[],$type)
+    {
+        $productcheck = StockItem::where('product_id',$data['productId'])->get()->first();
+        if($type == 'purchase'){
+            if($productcheck ==null){
+                $stock = new StockItem();
+                $stock->product_id = $data['productId'];
+                $stock->quantity = $data['quantity'];
+                $stock->unit_id = $data['unitId'];
+                $stock->save();
+            }else{
+
+                $qty = $productcheck->quantity;
+                $productcheck->quantity = (float) $qty + (float) $data['quantity'];
+                $productcheck->save();
+            }
+        }else{
+            if($productcheck ==null){
+                $stock = new StockItem();
+                $stock->product_id = $data['productId'];
+                $stock->quantity = $data['quantity'];
+                $stock->unit_id = $data['unitId'];
+                $stock->save();
+            }else{
+
+                $qty = $productcheck->quantity;
+                $productcheck->quantity = (float) $qty - (float) $data['quantity'];
+                $productcheck->save();
+            }
+        }
+
+
+    }
+
 }

@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form id="add-employee-form"  action="{{ route('save-purchases')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-employee-form"  action="{{ route('save-products')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Brand </label>
                                             <select class="form-control" id="brand_id" name="brand_id">
-                                                <option>select</option>
+                                                <option value="">select</option>
                                                 @foreach ($data['brand'] as $brand)
                                                     <option value="{{$brand->id}}">{{ $brand->name}}</option>
                                                 @endforeach

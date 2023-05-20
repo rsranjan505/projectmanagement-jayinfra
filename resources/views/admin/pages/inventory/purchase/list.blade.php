@@ -15,17 +15,18 @@
                     @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'list'])
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table " id="products-table">
+                            <table class="table " id="purchase-table">
                                 <thead>
                                     <tr>
                                         <th>SL No</th>
-                                        <th>Product Category</th>
-                                        <th>Product Name</th>
-                                        <th>Brand</th>
-                                        <th>Model No</th>
-                                        <th>Serial No</th>
-                                        <th>Tax Rate</th>
-                                        <th>Hsn Code</th>
+                                        <th>Supplier Name</th>
+                                        <th>Invoice Number</th>
+                                        <th>Invoice Date</th>
+                                        <th>Payment Mode</th>
+                                        <th>Sub Total</th>
+                                        <th>Tax Amount</th>
+                                        <th>Shipping Charge</th>
+                                        <th>Invoice Amount</th>
                                         <th>Added By</th>
                                         <th>Created Date</th>
                                         <th>Status</th>

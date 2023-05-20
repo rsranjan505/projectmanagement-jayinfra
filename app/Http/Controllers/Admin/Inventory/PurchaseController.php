@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Models\ItemTransaction;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Supplier;
@@ -30,28 +31,32 @@ class PurchaseController extends Controller
                     ->setRowId(function ($purchase) {
                         return 'row'.$purchase->id;
                     })
-                    ->addColumn('purchase Category', function ($purchase) {
-                        return $purchase->category->name;
+                    ->addColumn('Supplier Name', function ($purchase) {
+                        return $purchase->supplier->name;
                     })
-                    ->addColumn('purchase Name', function ($purchase) {
-                        return $purchase->name_desc;
+                    ->addColumn('Invoice Number', function ($purchase) {
+                        return $purchase->invoice_number;
                     })
 
-                    ->addColumn('Brand', function ($purchase) {
-                        return $purchase->brand !=null ? $purchase->brand->name : '';
+                    ->addColumn('Invoice Date', function ($purchase) {
+                        return $purchase->invoice_date;
                     })
-                    ->addColumn('Model No', function ($purchase) {
-                        return $purchase->model_no;
+                    ->addColumn('Payment Mode', function ($purchase) {
+                        return ucfirst($purchase->payment_mode);
                     })
-                    ->addColumn('Serial No', function ($purchase) {
-                        return $purchase->serial_number;
+                    ->addColumn('Sub Total', function ($purchase) {
+                        return $purchase->amount;
                     })
-                    ->addColumn('Tax Rate', function ($purchase) {
-                        return $purchase->tax_rate->sku ;
+                    ->addColumn('Tax Amount', function ($purchase) {
+                        return $purchase->tax_amount;
                     })
-                    ->addColumn('Hsn Code', function ($purchase) {
-                        return $purchase->hsn_code;
+                    ->addColumn('Shipping Charge', function ($purchase) {
+                        return $purchase->shipping_charge;
                     })
+                    ->addColumn('Invoice Amount', function ($purchase) {
+                        return $purchase->invoice_amount;
+                    })
+
                     ->addColumn('Added By', function ($purchase) {
                         return $purchase->creator ? $purchase->creator->name : '';
                     })
@@ -96,36 +101,63 @@ class PurchaseController extends Controller
         $this->data['products'] = Product::all();
         $this->data['suppliers'] = Supplier::all();
         $this->data['units'] = Unit::all();
+        $this->data['taxrates'] = TaxRate::all();
         return view('admin.pages.inventory.purchase.add',['data' => $this->data]);
     }
 
     public function save(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'purchase_category_id' =>'required',
-            'tax_rate_id' => 'required',
-            'hsn_code' =>'required',
+            'supplier_id' => 'required|string',
+            'invoice_number' =>'required|unique:purchases,invoice_number',
+            'invoice_date' => 'required',
         ]);
-
-        $data = $request->except(['avatar']);
+        if(!$request->has('product_items')){
+            return redirect()->back()->with(['warning'=>'products missing.']);
+        }
+        $data = $request->except(['input_product_id','input_quantity','input_unit_id','input_taxrate_id','input_unit_price','input_total_price','product_items']);
         $data['created_by'] = auth()->user()->id;
-        $data['name_desc'] = $request->name. ' '. $request->size.' '. $request->color;
 
         $purchase = recordSave(purchase::class,$data,null,null);
-        if($request->avatar !=null){
-            $image = fileUpload($request->avatar,$purchase,'local');
-            $image['document_type']='avatar';
-            $purchase->image()->create($image);
+        if($purchase){
+            foreach($request->product_items as $item){
+                $tranSectItem = new ItemTransaction();
+
+                $tranSectItem->product_id = $item['product_id'];
+                $tranSectItem->quantity = $item['quantity'];
+                $tranSectItem->unit_id = $item['unit_id'];
+                $tranSectItem->tax_rate_id  = $item['tax_rate_id'];
+                $tranSectItem->unit_amount = $item['unit_amount'];
+                $tranSectItem->total_amount = $item['total_amount'];
+
+                $taxrate = TaxRate::where('id',$item['tax_rate_id'])->pluck('sku')->first();
+
+                $tax_amount = ((float) $taxrate * (float) $item['total_amount'])/100;
+                $tranSectItem->tax_amount = $tax_amount;
+                $tranSectItem->net_amount = (float) $item['total_amount'] + $tax_amount;
+                $tranSectItem->created_by = auth()->user()->id;
+
+                $tranSectItem->type = 'purchase';
+
+                $purchase->transectionItem()->save($tranSectItem);
+                //Reflect Stock table
+                $data = [
+                    'productId' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                    'unitId' => $item['unit_id'],
+                ];
+                $this->updateStockItems($data,'purchase');
+
+            }
         }
+
 
         return redirect()->back()->with(['success'=>'purchase has been added successfully.']);
     }
 
     public function edit($id)
     {
-        $this->data['category'] = purchaseCategory::all();
-        $this->data['brand'] = Brand::all();
+
         $this->data['tax_rate'] = TaxRate::all();
         $this->data['purchase'] = purchase::find($id);
         return view('admin.pages.inventory.purchase.edit',['data' => $this->data]);

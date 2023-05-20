@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.inventory.product-nav-header' ,['activeTab' => 'add'])
+                    @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'add'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form id="add-employee-form"  action="{{ route('save-products')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-purchase-form"  action="{{ route('save-purchases')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -34,7 +34,7 @@
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Select Supplier*</label>
                                             <select class="form-control" id="supplier_id" name="supplier_id">
-                                                <option>select</option>
+                                                <option value="">select</option>
                                                 @foreach ($data['suppliers'] as $supplier)
                                                     <option value="{{$supplier->id}}">{{ $supplier->name}}</option>
                                                 @endforeach
@@ -46,13 +46,13 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Invoice Number</label>
-                                            <input type="text" class="form-control" id="invoice_number" name="size" placeholder="Enter invoice number">
+                                            <input type="text" class="form-control" id="invoice_number" value="{{ old('invoice_number') }}" name="invoice_number" placeholder="Enter invoice number">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Invoice Date</label>
-                                            <input type="date" class="form-control" id="invoice_date" name="invoice_date" placeholder="Enter invoice date">
+                                            <input type="date" class="form-control" id="invoice_date" value="{{ old('invoice_date') }}" name="invoice_date" placeholder="Enter invoice date">
                                         </div>
                                     </div>
                                 </div>
@@ -65,24 +65,26 @@
                                           <th>Product</th>
                                           <th>Qty</th>
                                           <th>Unit</th>
+
+                                          <th>Tax Rate</th>
                                           <th>Unit Price(&#8377;)</th>
                                           <th>Subtotal(&#8377;)</th>
                                           <th>Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr id="item_row">
+                                        <tbody id="item_row">
+                                        {{-- <tr id="item_row"> --}}
                                           {{-- <td>1</td>
                                           <td>Call of Duty</td>
                                           <td>455-981-221</td>
                                           <td>El snort testosterone trophy driving gloves handsome</td>
                                           <td>$64.50</td> --}}
-                                        </tr>
+                                        {{-- </tr> --}}
 
                                         <tr>
-                                          <td>1</td>
+                                          <td>#</td>
                                             <td>
-                                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                                <select class="form-control" id="input_product_id" name="input_product_id">
                                                     <option>select</option>
                                                     @foreach ($data['products'] as $product)
                                                         <option value="{{$product->id}}">{{ $product->name}}</option>
@@ -90,19 +92,31 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" id="qty" name="qty" placeholder="Enter invoice date"></td>
+                                                <input type="text" onchange="calculateValueByTextChange()" class="form-control" id="input_quantity" name="input_quantity" placeholder="Enter quantity"></td>
                                             <td>
-                                                <select class="form-control" id="supplier_id" name="supplier_id">
+                                                <select class="form-control" id="input_unit_id" name="input_unit_id">
                                                 <option>select</option>
                                                     @foreach ($data['units'] as $unit)
                                                         <option value="{{$unit->id}}">{{ $unit->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                          <td>$25.99</td>
+                                            <td>
+                                                <select class="form-control" id="input_taxrate_id" name="input_taxrate_id">
+                                                <option>select</option>
+                                                    @foreach ($data['taxrates'] as $taxrate)
+                                                        <option value="{{$taxrate->id}}">{{ $taxrate->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td> <input type="text" class="form-control" onchange="calculateValueByTextChange()" id="input_unit_price" name="input_unit_price" placeholder="Enter unit price"></td>
+                                            <td> <input type="text" class="form-control" id="input_total_price" name="input_total_price" readonly></td>
+                                            <td><button id="addBtn" class="btn btn-success" type="button"> <i class="far fa-plus-square nav-icon"></i></button></ion-icon></td>
                                         </tr>
                                         </tbody>
                                       </table>
+                                      <div id="product_error" class="alert alert-danger" style="display:none;">
+                                    </div>
                                     </div>
                                     <!-- /.col -->
                                   </div>
@@ -111,113 +125,51 @@
                                     <!-- accepted payments column -->
                                     <div class="col-6">
                                       <p class="lead">Payment Methods:</p>
-                                      {{-- <img src="../../dist/img/credit/visa.png" alt="Visa">
-                                      <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                                      <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                                      <img src="../../dist/img/credit/paypal2.png" alt="Paypal"> --}}
-
-                                      {{-- <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                      </p> --}}
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Select Payment method*</label>
+                                                <select class="form-control" id="payment_mode" name="payment_mode">
+                                                    <option value="">select</option>
+                                                    <option value="cash" >Cash</option>
+                                                    <option value="cheque" >Cheque</option>
+                                                    <option value="online"  >Online</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Notes</label>
+                                                <textarea type="text" class="form-control" rows="4" id="bill_note" name="bill_note"> {{ old('bill_note') }}</textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-6">
-                                      <p class="lead">Amount Due 2/22/2014</p>
+                                      {{-- <p class="lead">Amount Due 2/22/2014</p> --}}
 
                                       <div class="table-responsive">
                                         <table class="table">
                                           <tr>
-                                            <th style="width:50%">Subtotal:</th>
-                                            <td>$250.30</td>
+                                            <th style="width:50%">Subtotal (&#8377;):</th>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="amount" name="amount"></td>
                                           </tr>
                                           <tr>
-                                            <th>Tax (9.3%)</th>
-                                            <td>$10.34</td>
+                                            <th>Tax (&#8377;):</th>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="tax_amount" name="tax_amount"></td>
                                           </tr>
                                           <tr>
-                                            <th>Shipping:</th>
-                                            <td>$5.80</td>
+                                            <th>Shipping (&#8377;):</th>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="shipping_charge" name="shipping_charge"></td>
                                           </tr>
                                           <tr>
-                                            <th>Total:</th>
-                                            <td>$265.24</td>
+                                            <th>Total (&#8377;):</th>
+                                            <td><input type="text" class="form-control" value="0.00" id="invoice_amount" name="invoice_amount"></td>
                                           </tr>
                                         </table>
                                       </div>
                                     </div>
                                     <!-- /.col -->
                                   </div>
-                                {{-- <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Code </label>
-                                            <input type="number" class="form-control" id="code" name="code" placeholder="Enter product code">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Brand </label>
-                                            <select class="form-control" id="brand_id" name="brand_id">
-                                                <option>select</option>
-                                                @foreach ($data['brand'] as $brand)
-                                                    <option value="{{$brand->id}}">{{ $brand->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Size</label>
-                                            <input type="text" class="form-control" id="size" name="size" placeholder="Enter Product size">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Product Colour</label>
-                                            <input type="text" class="form-control" id="color" name="color" placeholder="Enter Product color">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Model Number</label>
-                                            <input type="text" class="form-control" id="model_no" name="model_no" placeholder="Enter model number">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Serial Number</label>
-                                            <input type="text" class="form-control" id="serial_number" name="serial_number" placeholder="Enter serial number">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Tax Rate</label>
-                                            <select class="form-control" id="tax_rate_id" name="tax_rate_id">
-                                            <option  value="">select</option>
-                                                @foreach ($data['tax_rate'] as $tax_rate)
-                                                    <option value="{{$tax_rate->id}}">{{ $tax_rate->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Hsn Code*</label>
-                                            <input type="text" class="form-control" id="hsn_code" name="hsn_code" placeholder="Enter Product hsn code">
-                                        </div>
-                                    </div>
-                                </div> --}}
-
                             </div>
 
                             <div class="card-footer">
@@ -231,10 +183,16 @@
     </div>
 </section>
 
-  <script src="{{ asset('admin/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
-  <script src="{{ asset('admin/custom/custom.js')}}"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+<script src="{{ asset('admin/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{ asset('admin/custom/custom.js')}}"></script>
 
-  <script>
+<script>
+    $(document).ready(function() {
 
-</script>
+        purchaseDatapopulate();
+
+    });
+  </script>
 @endsection
