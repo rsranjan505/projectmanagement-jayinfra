@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'Jay Infra Projects | Supplier')
-@section('inventory_section', 'menu-open')
-@section('suppliers_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Supplier'] )
+@section('page_title', 'Jay Infra Projects | Client')
+@section('project_section', 'menu-open')
+@section('clients_section', 'active')
+@include('admin._partials.bredcum',['title'=>'Client'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.inventory.supplier-nav-header' ,['activeTab' => 'add'])
+                    @include('admin.components.project.client-nav-header' ,['activeTab' => 'add'])
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form id="add-employee-form"  action="{{ route('save-suppliers')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-client-form"  action="{{ route('save-clients')}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 {{-- <div class="row">
@@ -37,8 +37,8 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Contact Name*</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Contact name">
+                                            <label for="exampleInputEmail1">Client Name*</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Client name">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
@@ -48,7 +48,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Registration Number*</label>
@@ -61,7 +61,7 @@
                                             <input type="text" class="form-control" id="pan" name="pan" placeholder="Enter Pan Number">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
@@ -77,14 +77,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">GSTIN*</label>
                                             <input type="text" class="form-control" id="gstin" name="gstin"  placeholder="Enter GSTIN Number">
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-12 col-sm-12">
                                         <div class="form-group">
@@ -96,6 +96,16 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
+                                            <label for="exampleInputEmail1">Client Type*</label>
+                                            <select class="form-control" id="type" name="type">
+                                                <option value="">select</option>
+                                                <option value="government">government</option>
+                                                <option value="private">private</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
                                             <label for="exampleInputEmail1">State*</label>
                                             <select class="form-control" id="state_id" name="state_id">
                                                 <option value="">select</option>
@@ -105,19 +115,20 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">City*</label>
                                             <select class="form-control" id="city_id" name="city_id">
                                                 <option value="">select state first</option>
-                                                @foreach ($data['city'] as $city)
+                                                {{-- @foreach ($data['city'] as $city)
                                                     <option value="{{$city->id}}">{{ $city->name}}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">postcode*</label>
@@ -138,7 +149,8 @@
 </section>
 
 
-  <script src="{{ asset('admin/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
   <script src="{{ asset('admin/custom/custom.js')}}"></script>
 
   <script>

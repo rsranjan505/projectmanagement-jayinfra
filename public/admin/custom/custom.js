@@ -602,11 +602,60 @@ $(function () {
                     required: true,
                     name: true,
                 },
+                business_name: {
+                    required: true,
+                    business_name: true,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                address: {
+                    required: true,
+                    address: true,
+                },
+                gstin: {
+                    required: true,
+                    gstin: true,
+                },
+                state_id: {
+                    required: true,
+                    state_id: true,
+                },
+                city_id: {
+                    required: true,
+                    city_id: true,
+                },
             },
             messages: {
                     name: {
                         required: "Please enter a name ",
                         name: "Please enter a valid name"
+                    },
+
+                    business_name: {
+                        required: "Please enter a name ",
+                        business_name: "Please enter a valid name"
+                    },
+                    email: {
+                        required: "Please enter a name ",
+                        email: "Please enter a valid name"
+                    },
+                    address: {
+                        required: "Please enter a address ",
+                        address: "Please enter a valid address"
+                    },
+                    gstin: {
+                        required: "Please enter a gstin ",
+                        gstin: "Please enter a valid gstin"
+                    },
+                    state_id: {
+                        required: "Please enter a state ",
+                        state_id: "Please enter a valid state"
+                    },
+                    city_id: {
+                        required: "Please enter a city ",
+                        city_id: "Please enter a valid city"
                     },
                 },
             errorElement: 'span',
@@ -1297,6 +1346,126 @@ $(function () {
          });
 
        });
+
+
+    //client
+
+         //Supplier entry
+         $(function () {
+            $('#add-client-form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        name: true,
+                    },
+                    business_name: {
+                        required: true,
+                        business_name: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    address: {
+                        required: true,
+                        address: true,
+                    },
+                    type: {
+                        required: true,
+                        type: true,
+                    },
+                    state_id: {
+                        required: true,
+                        state_id: true,
+                    },
+                    city_id: {
+                        required: true,
+                        city_id: true,
+                    },
+                    postcode: {
+                        required: true,
+                        postcode: true,
+                    },
+                },
+                messages: {
+                        name: {
+                            required: "Please enter a name ",
+                            name: "Please enter a valid name"
+                        },
+                        business_name: {
+                            required: "Please enter a name ",
+                            business_name: "Please enter a valid name"
+                        },
+                        email: {
+                            required: "Please enter a name ",
+                            email: "Please enter a valid name"
+                        },
+                        address: {
+                            required: "Please enter a address ",
+                            address: "Please enter a valid address"
+                        },
+                        type: {
+                            required: "Please select a type ",
+                            type: "Please enter a valid type"
+                        },
+                        state_id: {
+                            required: "Please select a state ",
+                            state_id: "Please select a valid state"
+                        },
+                        city_id: {
+                            required: "Please select a city ",
+                            city_id: "Please select a valid city"
+                        },
+                        postcode: {
+                            required: "Please enter a postcode ",
+                            postcode: "Please enter a valid postcode"
+                        },
+                    },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+
+          $(function () {
+            $('#clients-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "clients/",
+
+            columns: [
+                {
+                    data: "DT_RowIndex",
+                    name: "SL No",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                },
+                {data: 'Client Name', name: 'Client Name'},
+                {data: 'Business Name', name: 'Business Name'},
+                {data: 'Type', name: 'Type'},
+                {data: 'Email', name: 'Email'},
+                {data: 'Mobile', name: 'Mobile'},
+                {data: 'Address', name: 'Address'},
+                {data: 'City', name: 'City'},
+                {data: 'State', name: 'State'},
+                {data: 'Postcode', name: 'Postcode'},
+                {data: 'Added By', name: 'Added By'},
+                {data: 'Created Date', name: 'Created Date'},
+                {data: 'Status', name: 'Status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ],
+
+            });
+          });
 
 
 //sweet alert

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\SupplierController;
 use App\Http\Controllers\Admin\Settings\Products\UnitController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Project\ClientController;
 use App\Http\Controllers\Admin\Project\Location\BlockController;
 use App\Http\Controllers\Admin\Project\Location\DistrictController;
 use App\Http\Controllers\Admin\Project\Location\PanchayatController;
@@ -235,6 +236,15 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
                 Route::get('/edit/{id?}', [VillageController::class, 'edit'])->name('edit-villages');
                 Route::get('/change-status/{id}', [VillageController::class, 'changeStatus'])->name('villages-status-change');
             });
+        });
+
+        Route::prefix('clients')->group(function () {
+            Route::get('/', [ClientController::class, 'index'])->name('clients-list');
+            Route::get('/add', [ClientController::class, 'create'])->name('create-clients');
+            Route::post('/add', [ClientController::class, 'save'])->name('save-clients');
+            Route::get('/edit/{id?}', [ClientController::class, 'edit'])->name('edit-clients');
+            Route::post('/edit', [ClientController::class, 'update'])->name('update-clients');
+            Route::get('/change-status/{id}', [ClientController::class, 'changeStatus'])->name('clients-status-change');
         });
     });
 

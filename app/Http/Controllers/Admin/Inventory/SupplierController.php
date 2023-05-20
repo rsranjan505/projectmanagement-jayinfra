@@ -19,9 +19,9 @@ class SupplierController extends Controller
         if ($request->ajax()) {
 
             if(auth()->user()->role->name == 'admin'){
-                $suppliers = Supplier::with('state','city','gst','creator')->limit(10)->latest();
+                $suppliers = Supplier::with('state','city','gst','creator')->latest();
             }else{
-                $suppliers = Supplier::where('id',auth()->user()->id)->with('state','city','gst','creator')->limit(10)->latest();
+                $suppliers = Supplier::where('id',auth()->user()->id)->with('state','city','gst','creator')->latest();
             }
 
             return DataTables::of($suppliers)

@@ -71,7 +71,7 @@
     </a>
     <ul class="nav nav-treeview">
       <li class="nav-item">
-        <a href="pages/charts/chartjs.html" class="nav-link">
+        <a href="{{ route('clients-list')}}" class="nav-link @yield('clients_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>Clients</p>
         </a>
