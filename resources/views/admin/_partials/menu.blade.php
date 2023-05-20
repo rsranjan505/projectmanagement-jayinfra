@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
+                <a href="{{ route('stock-list')}}" class="nav-link @yield('stock_section')">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Stocks</p>
                 </a>

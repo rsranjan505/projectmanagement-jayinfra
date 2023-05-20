@@ -152,6 +152,7 @@ $(function () {
     $('#roles-table').DataTable({
         processing: true,
         serverSide: true,
+        paging:true,
         ajax: "roles/",
 
     columns: [
@@ -690,6 +691,7 @@ $(function () {
         $('#purchase-table').DataTable({
             processing: true,
             serverSide: false,
+            paging: true,
             ajax: "purchases/",
 
         columns: [
@@ -981,6 +983,70 @@ $(function () {
       });
 
 
+      //Item Transactions
+
+    function itemlist(productId){
+        $(function () {
+            var url = "../items-show/"+productId;
+            $('#purchase-items-table').DataTable({
+                processing: true,
+                serverSide: false,
+                paging: true,
+                ajax: url,
+
+            columns: [
+                {
+                    data: "DT_RowIndex",
+                    name: "SL No",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                },
+                {data: 'Product Name', name: 'Product Name'},
+                {data: 'Type', name: 'Type'},
+                {data: 'Quantity', name: 'Quantity'},
+                {data: 'Unit', name: 'Unit'},
+                {data: 'Tax Rate', name: 'Tax Rate'},
+                {data: 'Unit Amount', name: 'Unit Amount'},
+                {data: 'Total Amount', name: 'Total Amount'},
+                {data: 'Tax Amount', name: 'Tax Amount'},
+                {data: 'Net Amount', name: 'Net Amount'},
+                {data: 'Status', name: 'Status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ],
+
+            });
+          });
+
+    }
+
+
+    //stock
+    $(function () {
+        $('#stock-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "stock-list",
+
+        columns: [
+            {
+                data: "DT_RowIndex",
+                name: "SL No",
+                className: "text-center",
+                orderable: false,
+                searchable: false,
+            },
+            {data: 'Product Name', name: 'Product Name'},
+            {data: 'Quantity', name: 'Quantity'},
+            {data: 'Unit', name: 'Quantity'},
+            {data: 'Status', name: 'Status'},
+            // {data: 'action', name: 'action', orderable: false, searchable: false},
+        ],
+
+        });
+      });
+
+
 
     ////////////////////////////////////////////////////////
     ////////////// project Location /////////////////////
@@ -1235,13 +1301,13 @@ $(function () {
 
 //sweet alert
 function deleteConfirmation(id,model){
+        console.log(model);
 
-    // var id = id;
-    // if(model=='feature'){
-    //     var url ='';
-    // }else if(model=='amenity'){
-    //     var url ='';
-    // }
+        if(model == 'item'){
+            var url = "../../purchases/items-delete/"+id;
+        }else if(model == 'purchase'){
+            var url = "purchases/delete/"+id;
+        }
 
         Swal.fire({
             title: 'Are you sure?',
@@ -1256,14 +1322,40 @@ function deleteConfirmation(id,model){
             buttonsStyling: false
         }).then(function (result) {
             if (result.value) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Deleted!',
-                text: 'Your file has been deleted.',
-                customClass: {
-                confirmButton: 'btn btn-success'
-                }
-            });
+                $.ajax({
+                    url:url,
+                    type: "GET",
+                    // data: {
+                    //     id: 5
+                    // },
+                    dataType: "html",
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            customClass: {
+                            confirmButton: 'btn btn-success'
+                            }
+                        }).then(function(success){
+                            location.reload();
+                        });
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        var err = JSON.parse(xhr.responseText);
+                        Swal.fire({
+                            title: 'Cancelled',
+                            text: err.message,
+                            icon: 'error',
+                            customClass: {
+                            confirmButton: 'btn btn-success'
+                            }
+                        });
+
+                    },
+
+                });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
             Swal.fire({
                 title: 'Cancelled',

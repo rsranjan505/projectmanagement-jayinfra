@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Employee\EmployeeController;
 use App\Http\Controllers\Admin\Inventory\CategoryController;
+use App\Http\Controllers\Admin\Inventory\ItemTransactionController;
 use App\Http\Controllers\Admin\Inventory\MaterialsController;
 use App\Http\Controllers\Admin\Inventory\PurchaseController;
+use App\Http\Controllers\Admin\Inventory\StockController;
 use App\Http\Controllers\Admin\Inventory\SupplierController;
 use App\Http\Controllers\Admin\Settings\Products\UnitController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -185,7 +187,20 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             Route::get('/edit/{id?}', [PurchaseController::class, 'edit'])->name('edit-purchases');
             Route::post('/edit', [PurchaseController::class, 'update'])->name('update-purchases');
             Route::get('/change-status/{id}', [PurchaseController::class, 'changeStatus'])->name('purchases-status-change');
+            Route::get('/delete/{id?}', [PurchaseController::class, 'delete'])->name('purchase-delete');
+
+            //purchase items list
+            Route::get('/items-list', [ItemTransactionController::class, 'index'])->name('purchase-items-list');
+            Route::get('/items-show/{purchaseId?}', [ItemTransactionController::class, 'show'])->name('purchase-items-show');
+            Route::get('/items-edit/{id?}', [ItemTransactionController::class, 'edit'])->name('purchase-items-edit');
+            Route::post('/items-edit', [ItemTransactionController::class, 'update'])->name('purchase-items-update');
+            Route::get('/items-delete/{id?}', [ItemTransactionController::class, 'delete'])->name('purchase-items-delete');
+
+
         });
+
+         //stock
+         Route::get('/stock-list', [StockController::class, 'index'])->name('stock-list');
     });
 
 

@@ -41,9 +41,6 @@
         </div>
     </div>
 </section>
-
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script src="{{ asset('admin/plugins/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 <script src="{{ asset('admin/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{ asset('admin/custom/custom.js')}}"></script>
 

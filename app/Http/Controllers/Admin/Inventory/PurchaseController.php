@@ -79,13 +79,15 @@ class PurchaseController extends Controller
                         }else{
                             $status = 'Activate';
                         }
+                        $model="'purchase'";
                         return '<div class="dropdown">
                                 <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
-                                <a class="dropdown-item" href="'.url('inventory/purchases/edit/'.$purchase->id).'">Edit</a>
+                                <a class="dropdown-item" href="'.url('inventory/purchases/items-show/'.$purchase->id).'">View Items</a>
+                                <a class="dropdown-item" href="'.url('inventory/purchases/edit/'.$purchase->id).'">Add items</a>
                                 <a class="dropdown-item" href="'.url('inventory/purchases/change-status/'.$purchase->id).'">'.$status.'</a>
-
+                                <a class="dropdown-item" onClick="deleteConfirmation('.$purchase->id.','.$model.')" href="#">Delete</a>
                                 </div>
                             </div>';
 
@@ -163,26 +165,26 @@ class PurchaseController extends Controller
         return view('admin.pages.inventory.purchase.edit',['data' => $this->data]);
     }
 
-    public function update(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'purchase_category_id' =>'required',
-            'tax_rate_id' => 'required',
-            'hsn_code' =>'required',
-        ]);
+    // public function update(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string',
+    //         'purchase_category_id' =>'required',
+    //         'tax_rate_id' => 'required',
+    //         'hsn_code' =>'required',
+    //     ]);
 
-        $data = $request->except(['avatar']);
+    //     $data = $request->except(['avatar']);
 
-        $purchase = recordSave(purchase::class,$data,null,null);
-        if($request->avatar !=null){
-            $image = fileUpload($request->avatar,$purchase,'local');
-            $image['document_type']='avatar';
-            $purchase->image()->create($image);
-        }
+    //     $purchase = recordSave(purchase::class,$data,null,null);
+    //     if($request->avatar !=null){
+    //         $image = fileUpload($request->avatar,$purchase,'local');
+    //         $image['document_type']='avatar';
+    //         $purchase->image()->create($image);
+    //     }
 
-        return redirect()->back()->with(['success'=>'purchase Has been updated successfully.']);
-    }
+    //     return redirect()->back()->with(['success'=>'purchase Has been updated successfully.']);
+    // }
 
     public function changeStatus($id)
     {
@@ -193,5 +195,16 @@ class PurchaseController extends Controller
         ]);
 
         return redirect()->back()->with(['success'=>'purchase status change successfully.']);
+    }
+
+    public function delete($id)
+    {
+        $purchase = Purchase::find($id);
+        $items = $purchase->transectionItem()->get();
+        if(count($items) > 0){
+            // return redirect()->back()->with(['success'=>'purchase status change successfully.']);
+            return bad("",'Cannot deleted !!!');
+        }
+        $purchase->delete();
     }
 }
