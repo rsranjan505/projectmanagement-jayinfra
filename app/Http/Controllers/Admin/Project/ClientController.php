@@ -146,11 +146,11 @@ class ClientController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'business_name' => 'required|string',
+            'business_name' => 'required|unique:clients,business_name,'.$request->id.',id',
+            'type' => 'required',
             'email' => 'required',
             'mobile' =>'required',
             'address' => 'required',
-            'gstin' => 'required',
             'state_id' =>'required',
             'city_id' =>'required',
             'postcode' =>'required',

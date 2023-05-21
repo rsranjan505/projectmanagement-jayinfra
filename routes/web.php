@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Project\Location\BlockController;
 use App\Http\Controllers\Admin\Project\Location\DistrictController;
 use App\Http\Controllers\Admin\Project\Location\PanchayatController;
 use App\Http\Controllers\Admin\Project\Location\VillageController;
+use App\Http\Controllers\Admin\Project\ProjectController;
 use App\Http\Controllers\Admin\Settings\CompanyProfileController;
 use App\Http\Controllers\Admin\Settings\DepartmentController;
 use App\Http\Controllers\Admin\Settings\DesignationController;
@@ -246,6 +247,15 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             Route::post('/edit', [ClientController::class, 'update'])->name('update-clients');
             Route::get('/change-status/{id}', [ClientController::class, 'changeStatus'])->name('clients-status-change');
         });
+
+        //Project
+        Route::get('/', [ProjectController::class, 'index'])->name('project-list');
+        Route::get('/add', [ProjectController::class, 'create'])->name('create-project');
+        Route::post('/add', [ProjectController::class, 'save'])->name('save-project');
+        Route::get('/edit/{id?}', [ProjectController::class, 'edit'])->name('edit-project');
+        Route::post('/edit', [ProjectController::class, 'update'])->name('update-project');
+        Route::get('/change-status/{id}', [ProjectController::class, 'changeStatus'])->name('project-status-change');
+
     });
 
 });

@@ -77,7 +77,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="pages/charts/flot.html" class="nav-link">
+        <a href="{{ route('project-list')}}" class="nav-link  @yield('project_project_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>Projects</p>
         </a>

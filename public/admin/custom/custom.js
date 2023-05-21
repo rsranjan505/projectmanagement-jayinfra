@@ -1468,6 +1468,94 @@ $(function () {
           });
 
 
+    //Project
+    $(function () {
+
+            $('#add-project-form').validate({
+              rules: {
+                name: {
+                    required: true,
+                    name: true,
+                },
+                project_type: {
+                    required: true,
+                    project_type: true,
+                  },
+                short_desc: {
+                  required: true,
+                  short_desc: true,
+                },
+                start_date: {
+                  required: true,
+                  start_date: true
+                },
+              },
+              messages: {
+                name: {
+                    required: "Please enter a name ",
+                    name: "Please enter a valid name"
+                },
+                project_type: {
+                    required: "Please enter a project type ",
+                    project_type: "Please enter a valid project type "
+                    },
+                short_desc: {
+                  required: "Please enter a short description ",
+                  short_desc: "Please enter a valid short description "
+                },
+                start_date: {
+                  required: "Please provide a date",
+                  start_date: "Please provide a date"
+                }
+              },
+              errorElement: 'span',
+              errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+              },
+              highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+              },
+              unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+              }
+            });
+    });
+
+
+    $(function () {
+
+        var table = $('#project-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "/project",
+            columns: [
+                {
+                    data: "DT_RowIndex",
+                    name: "SL No",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                },
+                {data: 'Project Name', name: 'Project Name'},
+                {data: 'Short Desciption', name: 'Short Desciption'},
+                {data: 'Desciption', name: 'Desciption'},
+                {data: 'Project Manager', name: 'Project Manager'},
+                {data: 'Project Type', name: 'Project Type'},
+                {data: 'Start Date', name: 'Start Date'},
+                {data: 'Deadline', name: 'Deadline'},
+                {data: 'Project Extimated Cost', name: 'Project Extimated Cost'},
+                {data: 'Client Name', name: 'Client Name'},
+                {data: 'Created Date', name: 'Created Date'},
+                {data: 'Project Status', name: 'Project Status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+
+    });
+
+
+
 //sweet alert
 function deleteConfirmation(id,model){
         console.log(model);

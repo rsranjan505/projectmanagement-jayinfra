@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Purchase extends Model
 {
     use HasFactory;
-    protected $fillable = ['supplier_id','invoice_number','invoice_date','payment_mode','amount','shipping_charge','tax_amount','invoice_amount','bill_note','is_active', 'created_by'];
+    protected $fillable = ['supplier_id','invoice_number','invoice_date','payment_mode','amount','shipping_charge','tax_amount','invoice_amount','bill_note','is_draft','is_active', 'created_by'];
 	protected $dates = ['created_at', 'updated_at'];
 
     public function supplier(){

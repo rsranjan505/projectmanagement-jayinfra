@@ -68,7 +68,7 @@
 
                                           <th>Tax Rate</th>
                                           <th>Unit Price(&#8377;)</th>
-                                          <th>Subtotal(&#8377;)</th>
+                                          <th>Total(&#8377;)</th>
                                           <th>Action</th>
                                         </tr>
                                         </thead>
@@ -85,7 +85,7 @@
                                           <td>#</td>
                                             <td>
                                                 <select class="form-control" id="input_product_id" name="input_product_id">
-                                                    <option>select</option>
+                                                    <option value="">Select Product</option>
                                                     @foreach ($data['products'] as $product)
                                                         <option value="{{$product->id}}">{{ $product->name}}</option>
                                                     @endforeach
@@ -95,7 +95,7 @@
                                                 <input type="text" onchange="calculateValueByTextChange()" class="form-control" id="input_quantity" name="input_quantity" placeholder="Enter quantity"></td>
                                             <td>
                                                 <select class="form-control" id="input_unit_id" name="input_unit_id">
-                                                <option>select</option>
+                                                <option value="">Select Unit</option>
                                                     @foreach ($data['units'] as $unit)
                                                         <option value="{{$unit->id}}">{{ $unit->name}}</option>
                                                     @endforeach
@@ -103,7 +103,7 @@
                                             </td>
                                             <td>
                                                 <select class="form-control" id="input_taxrate_id" name="input_taxrate_id">
-                                                <option>select</option>
+                                                <option value="">Select Tax</option>
                                                     @foreach ($data['taxrates'] as $taxrate)
                                                         <option value="{{$taxrate->id}}">{{ $taxrate->name}}</option>
                                                     @endforeach
@@ -127,7 +127,7 @@
                                       <p class="lead">Payment Methods:</p>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Select Payment method*</label>
+                                                <label for="exampleInputEmail1">Payment method*</label>
                                                 <select class="form-control" id="payment_mode" name="payment_mode">
                                                     <option value="">select</option>
                                                     <option value="cash" >Cash</option>
@@ -173,7 +173,8 @@
                             </div>
 
                             <div class="card-footer">
-                              <button type="submit" class="btn btn-success">Submit</button>
+                              <button type="submit" class="btn btn-success">Final Submit</button>
+                              <button type="button" class="btn btn-success">Save Draft</button>
                             </div>
                         </form>
                     </div>
