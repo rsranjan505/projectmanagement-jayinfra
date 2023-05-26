@@ -74,19 +74,20 @@ class PurchaseController extends Controller
                     })
 
                     ->addColumn('action', function($purchase){
-                        if($purchase->is_active ==1){
-                            $status = 'Deactivate';
+                        if($purchase->is_draft ==1){
+                            $class = 'disabled';
                         }else{
-                            $status = 'Activate';
+                            $class = '';
                         }
+
                         $model="'purchase'";
                         return '<div class="dropdown">
                                 <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3">
                                 <a class="dropdown-item" href="'.url('inventory/purchases/items-show/'.$purchase->id).'">View Items</a>
-                                <a class="dropdown-item" href="'.url('inventory/purchases/edit/'.$purchase->id).'">Add items</a>
-                                <a class="dropdown-item" href="'.url('inventory/purchases/change-status/'.$purchase->id).'">'.$status.'</a>
+                                <a class="dropdown-item '.$class.'" href="'.url('inventory/purchases/draft-items/'.$purchase->id).'">Add items</a>
+
                                 <a class="dropdown-item" onClick="deleteConfirmation('.$purchase->id.','.$model.')" href="#">Delete</a>
                                 </div>
                             </div>';
@@ -119,6 +120,7 @@ class PurchaseController extends Controller
         }
         $data = $request->except(['input_product_id','input_quantity','input_unit_id','input_taxrate_id','input_unit_price','input_total_price','product_items']);
         $data['created_by'] = auth()->user()->id;
+        $data['is_draft'] = $request->is_draft == 'on' ? 1 : 0;
 
         $purchase = recordSave(purchase::class,$data,null,null);
         if($purchase){
@@ -206,5 +208,18 @@ class PurchaseController extends Controller
             return bad("",'Cannot deleted !!!');
         }
         $purchase->delete();
+    }
+
+
+    //draft items view
+    public function draftItems($id)
+    {
+        $this->data['products'] = Product::all();
+        $this->data['suppliers'] = Supplier::all();
+        $this->data['units'] = Unit::all();
+        $this->data['taxrates'] = TaxRate::all();
+        $this->data['purchase'] = Purchase::with('transectionItem')->findOrfail($id);
+
+        return view('admin.pages.inventory.purchase.draft-item-add',['data' => $this->data]);
     }
 }

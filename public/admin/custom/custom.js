@@ -770,12 +770,14 @@ $(function () {
 
 
 
-     function purchaseDatapopulate()
+     function purchaseDatapopulate(amount,tax_amount,shipping_charge)
      {
         var rowIdx = 0;
-        var subTotal = 0;
-        var taxAmount = 0;
         var billAmount = 0;
+
+        var subTotal = $('#'+amount).val();
+        var taxAmount =  $('#'+tax_amount).val();
+        var shiping = $('#'+shipping_charge).val();
 
         var totalVal=0;
         var tax_rate =0;
@@ -955,7 +957,12 @@ $(function () {
 
     //puchase validation
     $(function () {
-
+        // $.validator.setDefaults({
+        //     submitHandler: function () {
+        //         // action="{{ route('save-user')}}" method="post"
+        //         alert( "Form successful submitted!" );
+        //     }
+        //     });
         $('#add-purchase-form').validate({
           rules: {
             supplier_id: {

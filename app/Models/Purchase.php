@@ -21,7 +21,7 @@ class Purchase extends Model
 
     public function transectionItem()
     {
-        return $this->morphOne(ItemTransaction::class, 'transacnable','model_type', 'model_id');
+        return $this->morphMany(ItemTransaction::class, 'transacnable','model_type', 'model_id');
     }
 
 }

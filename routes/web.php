@@ -191,6 +191,10 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             Route::get('/change-status/{id}', [PurchaseController::class, 'changeStatus'])->name('purchases-status-change');
             Route::get('/delete/{id?}', [PurchaseController::class, 'delete'])->name('purchase-delete');
 
+            //add items after draft items
+            Route::get('/draft-items/{id}', [PurchaseController::class, 'draftItems'])->name('draft-items-purchases');
+            Route::post('/draft-items/{id}', [PurchaseController::class, 'draftItemSave'])->name('draft-items-save-purchases');
+
             //purchase items list
             Route::get('/items-list', [ItemTransactionController::class, 'index'])->name('purchase-items-list');
             Route::get('/items-show/{purchaseId?}', [ItemTransactionController::class, 'show'])->name('purchase-items-show');

@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 
 @section('content')
-@section('page_title', 'Jay Infra Projects | Purchase')
+@section('page_title', 'Jay Infra Projects | Purchase Items')
 @section('inventory_section', 'menu-open')
 @section('purchase_section', 'active')
-@include('admin._partials.bredcum',['title'=>'Purchase'] )
+@include('admin._partials.bredcum',['title'=>'Purchase draft items'] )
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'add'])
+                    {{-- @include('admin.components.inventory.purchase-nav-header' ,['activeTab' => 'add']) --}}
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                        <form id="add-purchase-form"  action="{{ route('save-purchases')}}" method="post"  enctype="multipart/form-data">
+                        <form id="add-purchase-form"  action="{{ route('draft-items-save-purchases',$data['purchase']->id)}}" method="post"  enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -36,7 +36,7 @@
                                             <select class="form-control" id="supplier_id" name="supplier_id">
                                                 <option value="">select</option>
                                                 @foreach ($data['suppliers'] as $supplier)
-                                                    <option value="{{$supplier->id}}">{{ $supplier->name}}</option>
+                                                    <option value="{{$supplier->id}}" {{$data['purchase']->supplier_id==$supplier->id ? 'selected' : ''}}>{{ $supplier->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -46,16 +46,17 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Invoice Number</label>
-                                            <input type="text" class="form-control" id="invoice_number" value="{{ old('invoice_number') }}" name="invoice_number" placeholder="Enter invoice number">
+                                            <input type="text" class="form-control" id="invoice_number" value="{{ $data['purchase']->invoice_number }}" name="invoice_number" placeholder="Enter invoice number">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Invoice Date</label>
-                                            <input type="date" class="form-control" id="invoice_date" value="{{ old('invoice_date') }}" name="invoice_date" placeholder="Enter invoice date">
+                                            <input type="date" class="form-control" id="invoice_date" value="{{ $data['purchase']->invoice_date }}" name="invoice_date" placeholder="Enter invoice date">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-12 table-responsive">
                                       <table class="table table-striped">
@@ -65,21 +66,14 @@
                                           <th>Product</th>
                                           <th>Qty</th>
                                           <th>Unit</th>
-
                                           <th>Tax Rate</th>
                                           <th>Unit Price(&#8377;)</th>
                                           <th>Total(&#8377;)</th>
                                           <th>Action</th>
                                         </tr>
                                         </thead>
+
                                         <tbody id="item_row">
-                                        {{-- <tr id="item_row"> --}}
-                                          {{-- <td>1</td>
-                                          <td>Call of Duty</td>
-                                          <td>455-981-221</td>
-                                          <td>El snort testosterone trophy driving gloves handsome</td>
-                                          <td>$64.50</td> --}}
-                                        {{-- </tr> --}}
 
                                         <tr>
                                           <td>#</td>
@@ -114,6 +108,20 @@
                                             <td><button id="addBtn" class="btn btn-success" type="button"> <i class="far fa-plus-square nav-icon"></i></button></ion-icon></td>
                                         </tr>
                                         </tbody>
+                                        <tbody>
+                                            @foreach ($data['purchase']->transectionItem as $index => $item)
+                                                <tr>
+                                                    <td>{{$index}}</td>
+                                                    <td>{{$item->product->name}}</td>
+                                                    <td>{{$item->quantity}}</td>
+                                                    <td>{{$item->unit->name}}</td>
+                                                    <td>{{$item->tax_rate->name}}</td>
+                                                    <td>{{$item->unit_amount}}</td>
+                                                    <td>{{$item->total_amount}}</td>
+                                                    <td><a class="btn btn-danger remove" onClick="deleteConfirmation({{$item->id}},'item')" href="#"><i class="fa fa-trash" aria-hidden="true"></a></td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                       </table>
                                       <div id="product_error" class="alert alert-danger" style="display:none;">
                                     </div>
@@ -130,16 +138,16 @@
                                                 <label for="exampleInputEmail1">Payment method*</label>
                                                 <select class="form-control" id="payment_mode" name="payment_mode">
                                                     <option value="">select</option>
-                                                    <option value="cash" >Cash</option>
-                                                    <option value="cheque" >Cheque</option>
-                                                    <option value="online"  >Online</option>
+                                                    <option value="cash" {{$data['purchase']->payment_mode == 'cash' ? 'selected' : ''}}>Cash</option>
+                                                    <option value="cheque" {{$data['purchase']->payment_mode == 'cheque' ? 'selected' : ''}}>Cheque</option>
+                                                    <option value="online"  {{$data['purchase']->payment_mode == 'online' ? 'selected' : ''}}>Online</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Notes</label>
-                                                <textarea type="text" class="form-control" rows="4" id="bill_note" name="bill_note"> {{ old('bill_note') }}</textarea>
+                                                <textarea type="text" class="form-control" rows="4" id="bill_note" name="bill_note"> {{ $data['purchase']->bill_note }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -151,19 +159,19 @@
                                         <table class="table">
                                           <tr>
                                             <th style="width:50%">Subtotal (&#8377;):</th>
-                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="amount" name="amount"></td>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="{{$data['purchase']->amount}}" id="amount" name="amount"></td>
                                           </tr>
                                           <tr>
                                             <th>Tax (&#8377;):</th>
-                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="tax_amount" name="tax_amount"></td>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="{{$data['purchase']->tax_amount}}" id="tax_amount" name="tax_amount"></td>
                                           </tr>
                                           <tr>
                                             <th>Shipping (&#8377;):</th>
-                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="0.00" id="shipping_charge" name="shipping_charge"></td>
+                                            <td><input type="text" class="form-control" onchange="billAmountFieldChange()" value="{{$data['purchase']->shipping_charge}}" id="shipping_charge" name="shipping_charge"></td>
                                           </tr>
                                           <tr>
                                             <th>Total (&#8377;):</th>
-                                            <td><input type="text" class="form-control" value="0.00" id="invoice_amount" name="invoice_amount"></td>
+                                            <td><input type="text" class="form-control" value="{{$data['purchase']->invoice_amount}}" id="invoice_amount" name="invoice_amount"></td>
                                           </tr>
                                         </table>
                                       </div>

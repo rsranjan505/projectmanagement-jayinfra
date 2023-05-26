@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Inventory;
 
 use App\Http\Controllers\Controller;
 use App\Models\ItemTransaction;
+use App\Models\Product;
 use App\Models\Productitem;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
@@ -184,10 +185,23 @@ class ItemTransactionController extends Controller
             'quantity' => $item['quantity'],
             'unitId' => $item['unit_id'],
         ];
+        $this->updatePurchaseamount( $item->product_id, $item->id);
         $this->updateStockItems($data,'delete');
 
         $item->delete();
 
         return redirect()->back()->with(['success'=>'item deleted successfully.']);
+    }
+
+    public function updatePurchaseamount($productId,$deletedItemId)
+    {
+        $item = ItemTransaction::findOrfail($deletedItemId);
+        $purchase = Purchase::findOrfail($productId);
+
+        $purchase->amount = (float) $purchase->amount - (float) $item->total_amount;
+        $purchase->tax_amount = (float) $purchase->tax_amount - (float) $item->tax_amount;
+        $purchase->invoice_amount = (float) $purchase->invoice_amount - ((float) $item->tax_amount + (float) $item->total_amount);
+
+        $purchase->update();
     }
 }
