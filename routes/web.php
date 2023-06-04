@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Settings\Products\BrandController;
 use App\Http\Controllers\Admin\Settings\Products\TaxtRateController;
 use App\Http\Controllers\Admin\Settings\RolesController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Expense\ExpenseController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -260,6 +261,17 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::post('/edit', [ProjectController::class, 'update'])->name('update-project');
         Route::get('/change-status/{id}', [ProjectController::class, 'changeStatus'])->name('project-status-change');
 
+    });
+
+    //expense module
+    Route::prefix('expenses')->group(function () {
+        Route::get('/', [ExpenseController::class, 'index'])->name('expenses-list');
+        Route::get('/add', [ExpenseController::class, 'create'])->name('create-expenses');
+        Route::post('/add', [ExpenseController::class, 'save'])->name('save-expenses');
+        Route::get('/edit/{id?}', [ExpenseController::class, 'edit'])->name('edit-expenses');
+        Route::get('/show/{id?}', [ExpenseController::class, 'show'])->name('show-expenses');
+        Route::post('/edit', [ExpenseController::class, 'update'])->name('update-expenses');
+        Route::post('/change-status', [ExpenseController::class, 'expenseStatusChange'])->name('expenses-status-change');
     });
 
 });

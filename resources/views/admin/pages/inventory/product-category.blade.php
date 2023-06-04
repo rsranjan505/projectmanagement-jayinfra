@@ -125,7 +125,7 @@
 
 <script>
 
-     function editModel(id){
+    function editModel(id){
         var url = "/category/edit/" + id;
             var modelHtml = "";
             $("#edit-category").modal('show');
@@ -142,7 +142,7 @@
                 },
             });
 
-        }
+    }
 </script>
 
 @endsection

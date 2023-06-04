@@ -1,0 +1,35 @@
+[
+
+    {
+        "id": "1",
+        "name": "Site Expense"
+    },
+    {
+        "id": "2",
+        "name": "Salary Expense"
+    },
+    {
+        "id": "3",
+        "name": "Materials Expense"
+    },
+    {
+        "id": "4",
+        "name": "Fuel Expense"
+    },
+    {
+        "id": "5",
+        "name": "Travel Expense"
+    },
+    {
+        "id": "6",
+        "name": "Food"
+    },
+    {
+        "id": "7",
+        "name": "Utility"
+    },
+    {
+        "id": "8",
+        "name": "Others"
+    }
+]

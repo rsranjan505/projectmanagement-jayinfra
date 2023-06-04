@@ -106,6 +106,20 @@ if (!function_exists('projectStatus')) {
 }
 
 
+if (!function_exists('expenseType')) {
+    function expenseType(): array
+    {
+        try {
+            $path = base_path('storage/josn/expenseType.json');
+            $json = file_get_contents($path);
+            return json_decode($json, true);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+}
+
+
 
 
 

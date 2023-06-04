@@ -873,10 +873,17 @@ $(function () {
                 idx.html(`Row ${dig - 1}`);
                 $(this).attr('id', `R${dig - 1}`);
                 });
+                console.log(subTotal);
+
+                totalVal = $('#total_amount'+rowIdx).val();
+                console.log(totalVal);
+                subTotal =  parseInt(subTotal) - parseInt(totalVal);
+
+                amountCalculation(subTotal,totalVal,taxAmount,tax_rate,rowIdx,'remove');
 
                 $(this).closest('tr').remove();
 
-                // amountCalculation(subTotal,totalVal,taxAmount,tax_rate,rowIdx,'remove');
+                //
 
                 rowIdx--;
 
@@ -918,6 +925,9 @@ $(function () {
     function amountCalculation(subTotal,totalVal,taxAmount,tax_rate,rowIdx,type)
     {
         var netTotal=0;
+
+        var taxAmount = $('#tax_amount').val();
+
         if(type == 'add'){
 
 
@@ -927,28 +937,26 @@ $(function () {
             let pos = tax_rate.indexOf("%");
             var taxValue = tax_rate.substring(0, parseInt(pos));
             let taxamt = (parseInt(totalVal) * parseInt(taxValue))/100;
-            taxAmount = taxAmount + parseInt(taxamt);
+            taxAmount = parseInt(taxAmount) + parseInt(taxamt);
             $('#tax_amount').val(taxAmount);
 
             netTotal =  parseInt(subTotal) + parseInt(taxAmount) + parseInt(shipping_charge);
 
         }else{
 
-            // totalVal = $('#total_amount'+rowIdx).val();
-          console.log(totalVal);
-          console.log(rowIdx);
+            totalVal = $('#total_amount'+rowIdx).val();
 
-            subTotal =  parseInt(subTotal) - parseInt(totalVal);
+            // subTotal =  parseInt(subTotal) - parseInt(totalVal);
             $('#amount').val(subTotal);
 
             let shipping_charge = $('#shipping_charge').val();
             let pos = tax_rate.indexOf("%");
             var taxValue = tax_rate.substring(0, parseInt(pos));
             let taxamt = (parseInt(totalVal) * parseInt(taxValue))/100;
-            taxAmount = taxAmount - parseInt(taxamt);
+            taxAmount = parseInt(taxAmount) - parseInt(taxamt);
             $('#tax_amount').val(taxAmount);
 
-            netTotal =   p(arseInt(taxAmount) + parseInt(shipping_charge)) - parseInt(subTotal);
+            netTotal =  parseInt(subTotal) - (parseInt(totalVal) + parseInt(taxamt) + parseInt(shipping_charge));
         }
 
 
@@ -1562,6 +1570,36 @@ $(function () {
     });
 
 
+    // Expense Section
+
+    $(function () {
+        $('#expense-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "expenses/",
+
+        columns: [
+            {
+                data: "DT_RowIndex",
+                name: "SL No",
+                className: "text-center",
+                orderable: false,
+                searchable: false,
+            },
+            {data: 'Expense Type', name: 'Expense Type'},
+            {data: 'Status', name: 'Status'},
+
+            {data: 'Amount', name: 'Amount'},
+            {data: 'Description', name: 'Description'},
+
+            {data: 'Added By', name: 'Added By'},
+            {data: 'Created Date', name: 'Created Date'},
+
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ],
+
+        });
+      });
 
 //sweet alert
 function deleteConfirmation(id,model){
