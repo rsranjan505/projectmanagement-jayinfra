@@ -99,6 +99,12 @@ class BlockController extends Controller
         return ok($block);
     }
 
+    public function show($districtId)
+    {
+        $block = Block::where('district_id',$districtId)->get();
+        return ok($block);
+    }
+
     public function changeStatus($id)
     {
         $block = Block::find($id);

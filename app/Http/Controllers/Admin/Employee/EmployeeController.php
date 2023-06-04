@@ -21,7 +21,7 @@ class EmployeeController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
+            if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager'){
                 $users = User::with('image','state','city')->limit(10)->latest();
             }else{
                 $users = User::where('id',auth()->user()->id)->with('image','state','city')->limit(10)->latest();

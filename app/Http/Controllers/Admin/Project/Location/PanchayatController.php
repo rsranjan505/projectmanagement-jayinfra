@@ -102,6 +102,12 @@ class PanchayatController extends Controller
         return ok($panchayat);
     }
 
+    public function show($blockId)
+    {
+        $panchayat = Panchayat::where('block_id',$blockId)->get();
+        return ok($panchayat);
+    }
+
     public function changeStatus($id)
     {
         $panchayat = Panchayat::find($id);

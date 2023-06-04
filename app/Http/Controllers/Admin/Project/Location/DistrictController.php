@@ -99,6 +99,12 @@ class DistrictController extends Controller
         return ok($district);
     }
 
+    public function show($stateId)
+    {
+        $district = District::where('state_id',$stateId)->get();
+        return ok($district);
+    }
+
     public function changeStatus($id)
     {
         $district = District::find($id);

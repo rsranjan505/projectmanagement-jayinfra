@@ -17,7 +17,7 @@ class ExpenseController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
+            if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager'){
                 $expenses = Expense::with('expanse_type','checkedby','creator','expensable')->latest();
             }else{
                 $expenses = Expense::where('created_by',auth()->user()->id)->with('expanse_type','checkedby','creator','expensable')->latest();
@@ -59,7 +59,7 @@ class ExpenseController extends Controller
                     ->addColumn('action', function($expense){
 
 
-                        if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager'){
+                        if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager' || auth()->user()->role->name == 'manager'){
                             return '<div class="dropdown">
                                 <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </button>

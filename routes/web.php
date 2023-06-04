@@ -17,7 +17,9 @@ use App\Http\Controllers\Admin\Project\Location\DistrictController;
 use App\Http\Controllers\Admin\Project\Location\PanchayatController;
 use App\Http\Controllers\Admin\Project\Location\VillageController;
 use App\Http\Controllers\Admin\Project\ProjectController;
-use App\Http\Controllers\Admin\Settings\CompanyProfileController;
+use App\Http\Controllers\Admin\Project\ProjectPhaseController;
+use App\Http\Controllers\Admin\Project\ProjectSchemeController;
+// use App\Http\Controllers\Admin\Settings\CompanyProfileController;
 use App\Http\Controllers\Admin\Settings\DepartmentController;
 use App\Http\Controllers\Admin\Settings\DesignationController;
 use App\Http\Controllers\Admin\Settings\GstController;
@@ -82,14 +84,14 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::get('/change-status/{id}', [EmployeeController::class, 'changeStatus'])->name('user-status-change');
     });
 
-    Route::prefix('company')->group(function () {
-        Route::get('/profile', [CompanyProfileController::class, 'index'])->name('company-list');
-        Route::get('/add', [CompanyProfileController::class, 'create'])->name('create-company');
-        Route::post('/add', [CompanyProfileController::class, 'save'])->name('save-company');
-        Route::get('/edit/{id?}', [CompanyProfileController::class, 'edit'])->name('edit-company');
-        Route::post('/edit', [CompanyProfileController::class, 'update'])->name('update-company');
-        Route::get('/change-status/{id}', [CompanyProfileController::class, 'changeStatus'])->name('company-status-change');
-    });
+    // Route::prefix('company')->group(function () {
+    //     Route::get('/profile', [CompanyProfileController::class, 'index'])->name('company-list');
+    //     Route::get('/add', [CompanyProfileController::class, 'create'])->name('create-company');
+    //     Route::post('/add', [CompanyProfileController::class, 'save'])->name('save-company');
+    //     Route::get('/edit/{id?}', [CompanyProfileController::class, 'edit'])->name('edit-company');
+    //     Route::post('/edit', [CompanyProfileController::class, 'update'])->name('update-company');
+    //     Route::get('/change-status/{id}', [CompanyProfileController::class, 'changeStatus'])->name('company-status-change');
+    // });
 
     Route::prefix('roles')->group(function () {
         Route::get('/', [RolesController::class, 'index'])->name('roles-list');
@@ -213,9 +215,11 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
 
      //Project MODULE
 
+
      Route::prefix('project')->group(function () {
         Route::prefix('location')->group(function () {
             Route::prefix('districts')->group(function () {
+                Route::get('/{stateId}', [DistrictController::class, 'show'])->name('districts-show');
                 Route::get('/', [DistrictController::class, 'index'])->name('districts-list');
                 Route::post('/add', [DistrictController::class, 'save'])->name('save-districts');
                 Route::get('/edit/{id?}', [DistrictController::class, 'edit'])->name('edit-districts');
@@ -223,6 +227,7 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             });
 
             Route::prefix('blocks')->group(function () {
+                Route::get('/{districtId}', [BlockController::class, 'show'])->name('blocks-show');
                 Route::get('/', [BlockController::class, 'index'])->name('blocks-list');
                 Route::post('/add', [BlockController::class, 'save'])->name('save-blocks');
                 Route::get('/edit/{id?}', [BlockController::class, 'edit'])->name('edit-blocks');
@@ -230,6 +235,7 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             });
 
             Route::prefix('panchayats')->group(function () {
+                Route::get('/{blockId}', [PanchayatController::class, 'show'])->name('panchayats-show');
                 Route::get('/', [PanchayatController::class, 'index'])->name('panchayats-list');
                 Route::post('/add', [PanchayatController::class, 'save'])->name('save-panchayats');
                 Route::get('/edit/{id?}', [PanchayatController::class, 'edit'])->name('edit-panchayats');
@@ -237,6 +243,7 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
             });
 
             Route::prefix('villages')->group(function () {
+                Route::get('/{panchayatId}', [VillageController::class, 'show'])->name('villages-show');
                 Route::get('/', [VillageController::class, 'index'])->name('villages-list');
                 Route::post('/add', [VillageController::class, 'save'])->name('save-villages');
                 Route::get('/edit/{id?}', [VillageController::class, 'edit'])->name('edit-villages');
@@ -261,6 +268,23 @@ Route::prefix('/')->middleware('auth','web')->group(function(){
         Route::post('/edit', [ProjectController::class, 'update'])->name('update-project');
         Route::get('/change-status/{id}', [ProjectController::class, 'changeStatus'])->name('project-status-change');
 
+        Route::prefix('phases')->group(function () {
+            Route::get('/', [ProjectPhaseController::class, 'index'])->name('phases-list');
+            Route::get('/add', [ProjectPhaseController::class, 'create'])->name('create-phases');
+            Route::post('/add', [ProjectPhaseController::class, 'save'])->name('save-phases');
+            Route::get('/edit/{id?}', [ProjectPhaseController::class, 'edit'])->name('edit-phases');
+            Route::post('/edit', [ProjectPhaseController::class, 'update'])->name('update-phases');
+            Route::get('/change-status/{id}', [ProjectPhaseController::class, 'changeStatus'])->name('phases-status-change');
+        });
+
+        Route::prefix('schemes')->group(function () {
+            Route::get('/', [ProjectSchemeController::class, 'index'])->name('schemes-list');
+            Route::get('/add', [ProjectSchemeController::class, 'create'])->name('create-schemes');
+            Route::post('/add', [ProjectSchemeController::class, 'save'])->name('save-schemes');
+            Route::get('/edit/{id?}', [ProjectSchemeController::class, 'edit'])->name('edit-schemes');
+            Route::post('/edit', [ProjectSchemeController::class, 'update'])->name('update-schemes');
+            Route::get('/change-status/{id}', [ProjectSchemeController::class, 'changeStatus'])->name('schemes-status-change');
+        });
     });
 
     //expense module

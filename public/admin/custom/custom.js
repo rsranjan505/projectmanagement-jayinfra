@@ -10,12 +10,80 @@ $('#state_id').on('change', function () {
             console.log(res);
             let html = "";
             html += '<select id="city_id" type="text" name="city_id" search class="form-control">';
+            html += "<option value=''>Select</option>";
             res.data.forEach((val, key) => {
                 html += "<option value=" + val.id + ">" + val.name + "</option>";
             });
             html += '</select>';
             $("#city_id").html("");
             $("#city_id").html(html);
+        },
+    });
+});
+
+
+//project phase location
+$('#location_state_id').on('change', function () {
+    let state_id = this.value;
+    $.ajax({
+        url: "/project/location/districts/"+state_id,
+        type: "get",
+
+        success: function (res) {
+            console.log(res);
+            let html = "";
+            html += '<select id="location_district_id" type="text" name="location[district_id]" search class="form-control">';
+            html += "<option value=''>Select</option>";
+            res.data.forEach((val, key) => {
+                html += "<option value=" + val.id + ">" + val.name + "</option>";
+            });
+            html += '</select>';
+            $("#location_district_id").html("");
+            $("#location_district_id").html(html);
+        },
+    });
+});
+
+//project phase location
+$('#location_district_id').on('change', function () {
+    let state_id = this.value;
+    $.ajax({
+        url: "/project/location/blocks/"+state_id,
+        type: "get",
+
+        success: function (res) {
+            console.log(res);
+            let html = "";
+            html += '<select id="location_block_id" type="text" name="location[block_id]" search class="form-control">';
+            html += "<option value=''>Select</option>";
+            res.data.forEach((val, key) => {
+                html += "<option value=" + val.id + ">" + val.name + "</option>";
+            });
+            html += '</select>';
+            $("#location_block_id").html("");
+            $("#location_block_id").html(html);
+        },
+    });
+});
+
+//project phase location
+$('#location_block_id').on('change', function () {
+    let state_id = this.value;
+    $.ajax({
+        url: "/project/location/panchayats/"+state_id,
+        type: "get",
+
+        success: function (res) {
+            console.log(res);
+            let html = "";
+            html += '<select id="location_panchayat_id" type="text" name="location[panchayat_id]" search class="form-control">';
+            html += "<option value=''>Select</option>";
+            res.data.forEach((val, key) => {
+                html += "<option value=" + val.id + ">" + val.name + "</option>";
+            });
+            html += '</select>';
+            $("#location_panchayat_id").html("");
+            $("#location_panchayat_id").html(html);
         },
     });
 });
@@ -1561,6 +1629,41 @@ $(function () {
                 {data: 'Deadline', name: 'Deadline'},
                 {data: 'Project Extimated Cost', name: 'Project Extimated Cost'},
                 {data: 'Client Name', name: 'Client Name'},
+                {data: 'Added By', name: 'Added By'},
+                {data: 'Created Date', name: 'Created Date'},
+                {data: 'Project Status', name: 'Project Status'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+
+    });
+
+    //Project Phase
+    $(function () {
+
+        var table = $('#project-phase-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "/project/phases",
+            columns: [
+                {
+                    data: "DT_RowIndex",
+                    name: "SL No",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                },
+                {data: 'Project Name', name: 'Project Name'},
+                {data: 'Title', name: 'Title'},
+                {data: 'Category', name: 'Category'},
+
+                {data: 'Phase Manager', name: 'Phase Manager'},
+                {data: 'Description', name: 'Description'},
+
+                {data: 'Start Date', name: 'Start Date'},
+                {data: 'Deadline', name: 'Deadline'},
+                {data: 'Phase Extimated Cost', name: 'Phase Extimated Cost'},
+                {data: 'Added By', name: 'Added By'},
                 {data: 'Created Date', name: 'Created Date'},
                 {data: 'Project Status', name: 'Project Status'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},

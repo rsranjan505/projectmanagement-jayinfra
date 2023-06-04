@@ -83,13 +83,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="pages/charts/inline.html" class="nav-link">
+        <a href="{{ route('phases-list')}}" class="nav-link @yield('project_phase_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>Projects Phases</p>
         </a>
       </li>
       <li class="nav-item">
-        <a href="pages/charts/uplot.html" class="nav-link">
+        <a href="{{ route('schemes-list')}}" class="nav-link @yield('project_scheme_section')">
           <i class="far fa-circle nav-icon"></i>
           <p>Projects Scheme</p>
         </a>
@@ -159,92 +159,92 @@
 </li>
 
 
-    <li class="nav-item @yield('setting_section')">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fa fa-book"></i>
-          <p>
-            Settings
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{ route('organisation-view')}}" class="nav-link @yield('business_profile_section')">
-                  <i class="far fa-user nav-icon"></i>
-                  <p>Business Profile</p>
-                </a>
-            </li>
+<li class="nav-item @yield('setting_section')">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fa fa-book"></i>
+        <p>
+        Settings
+        <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('organisation-view')}}" class="nav-link @yield('business_profile_section')">
+                <i class="far fa-user nav-icon"></i>
+                <p>Business Profile</p>
+            </a>
+        </li>
 
-            <li class="nav-item">
-                <a href="{{ route('user-list')}}" class="nav-link @yield('employee_section')">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                    Employee
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('departments-list')}}" class="nav-link @yield('departments_section')">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Departments
-              </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('designations-list')}}" class="nav-link @yield('designations_section')">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Designations
-              </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('roles-list')}}" class="nav-link @yield('roles_section')">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Roles
-              </p>
-              </a>
-            </li>
-            <li class="nav-item  @yield('products_settings_section')">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-book"></i>
-                <p>
-                    Products Settings
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route('brands-list')}}" class="nav-link @yield('brands_section')">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                            Brand
-                        </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('taxrates-list')}}" class="nav-link @yield('taxrates_section')">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                            Tax Rate
-                        </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('units-list')}}" class="nav-link @yield('units_section')">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                            Units
-                        </p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        <li class="nav-item">
+            <a href="{{ route('user-list')}}" class="nav-link @yield('employee_section')">
+            <i class="far fa-circle nav-icon"></i>
+            <p>
+                Employee
+            </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('departments-list')}}" class="nav-link @yield('departments_section')">
+            <i class="far fa-circle nav-icon"></i>
+            <p>
+            Departments
+            </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('designations-list')}}" class="nav-link @yield('designations_section')">
+            <i class="far fa-circle nav-icon"></i>
+            <p>
+            Designations
+            </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('roles-list')}}" class="nav-link @yield('roles_section')">
+            <i class="far fa-circle nav-icon"></i>
+            <p>
+            Roles
+            </p>
+            </a>
+        </li>
+        <li class="nav-item  @yield('products_settings_section')">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fa fa-book"></i>
+            <p>
+                Products Settings
+                <i class="right fas fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('brands-list')}}" class="nav-link @yield('brands_section')">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Brand
+                    </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('taxrates-list')}}" class="nav-link @yield('taxrates_section')">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Tax Rate
+                    </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('units-list')}}" class="nav-link @yield('units_section')">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Units
+                    </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-        </ul>
-    </li>
+    </ul>
+</li>
 
 
 

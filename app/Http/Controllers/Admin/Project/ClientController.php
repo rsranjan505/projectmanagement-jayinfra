@@ -18,11 +18,7 @@ class ClientController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
-                $clients = Client::with('state','city','gst','creator')->latest();
-            }else{
-                $clients = Client::where('id',auth()->user()->id)->with('state','city','gst','creator')->latest();
-            }
+            $clients = Client::with('state','city','gst','creator')->latest();
 
             return DataTables::of($clients)
                     ->addIndexColumn()

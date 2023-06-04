@@ -18,10 +18,10 @@ class MaterialsController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
+            if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager'){
                 $products = Product::with('category','brand','tax_rate','creator')->limit(10)->latest();
             }else{
-                $products = Product::where('id',auth()->user()->id)->with('category','brand','tax_rate','creator')->limit(10)->latest();
+                $products = Product::where('created_by',auth()->user()->id)->with('category','brand','tax_rate','creator')->limit(10)->latest();
             }
 
             return DataTables::of($products)

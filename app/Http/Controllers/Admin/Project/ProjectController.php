@@ -17,11 +17,7 @@ class ProjectController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
-                $projects = Project::with('manager','client','status','creator')->latest();
-            }else{
-                $projects = Project::where('id',auth()->user()->id)->with('manager','client','status','creator')->latest();
-            }
+            $projects = Project::with('manager','client','status','creator')->latest();
 
             return DataTables::of($projects)
                     ->addIndexColumn()
@@ -65,7 +61,7 @@ class ProjectController extends Controller
                     })
                     ->addColumn('Project Status', function ($project) {
 
-                        return $project->project_status_id;
+                        return $project->status !=null ? $project->status->name :'';
                     })
 
                     ->addColumn('action', function($project){

@@ -20,10 +20,10 @@ class PurchaseController extends Controller
     {
         if ($request->ajax()) {
 
-            if(auth()->user()->role->name == 'admin'){
+            if(auth()->user()->role->name == 'admin' || auth()->user()->role->name == 'manager'){
                 $purchases = Purchase::with('supplier','creator')->latest();
             }else{
-                $purchases = Purchase::where('id',auth()->user()->id)->with('supplier','creator')->latest();
+                $purchases = Purchase::where('created_by',auth()->user()->id)->with('supplier','creator')->latest();
             }
 
             return DataTables::of($purchases)
