@@ -53,7 +53,11 @@
 
         @include('landing.components.top-header')
         @include('landing.components.header')
-        @include('landing.components.hero-section')
+        @if (Route::is('home'))
+            @include('landing.components.hero-section')
+        @else
+            @include('landing.components.breadcrub')
+        @endif
 
         @yield('content')
         @show

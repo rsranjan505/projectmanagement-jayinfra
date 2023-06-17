@@ -23,6 +23,7 @@ class Controller extends BaseController
         $this->page['domain'] = 'http://jayinfraprojects.com/';
         $this->page['address'] = 'Allahabad Bank Colony, Khajpura, P.S- Shastri Nagar, Patna, Bihar-800023';
         $this->page['contact_number'] = '';
+        $this->page['email'] = 'info@jayinfraprojects.com';
         return $this->page;
     }
 

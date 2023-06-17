@@ -17,22 +17,22 @@
                   <div id="navbar-collapse" class="collapse navbar-collapse">
                       <ul class="nav navbar-nav ml-auto align-items-center">
                         <li class="nav-item active">
-                            <a href="#" class="nav-link ">Home </a>
+                            <a href="{{ route('home')}}" class="nav-link ">Home </a>
+
+                        </li>
+
+                        <li class="nav-item active">
+                            <a href="{{ route('about')}}" class="nav-link {{Route::is('about') ? 'active' :''}}" >About Us </a>
 
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link" >About Us </a>
+                            <a href="{{ route('projects')}}" class="nav-link ">Projects </a>
 
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link ">Projects </a>
-
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" >Services </a>
+                            <a href="{{ route('services')}}" class="nav-link" >Services </a>
 
                         </li>
 
@@ -42,7 +42,7 @@
                               <li><a href="news-left-sidebar.html">Gallery</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('contact')}}">Contact</a></li>
                         <li class="header-get-a-quote">
                             <a class="btn btn-primary" href="{{route('login')}}">Login</a>
                         </li>

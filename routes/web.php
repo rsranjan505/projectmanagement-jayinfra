@@ -30,6 +30,10 @@ use App\Http\Controllers\Admin\Settings\RolesController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Expense\ExpenseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Landing\AboutController;
+use App\Http\Controllers\Landing\ContactController;
+use App\Http\Controllers\Landing\ProjectController as LandingProjectController;
+use App\Http\Controllers\Landing\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +50,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/projects', [LandingProjectController::class, 'index'])->name('projects');
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 //Admin Section
 Auth::routes();

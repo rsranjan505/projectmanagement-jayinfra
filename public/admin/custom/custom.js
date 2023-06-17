@@ -156,7 +156,8 @@ $(function () {
 
     var table = $('#user-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "employee/",
         columns: [
           {
@@ -293,7 +294,8 @@ $(function () {
   $(function () {
     $('#units-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "units/",
 
     columns: [
@@ -349,7 +351,8 @@ $(function () {
   $(function () {
     $('#category-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "category/",
 
     columns: [
@@ -403,7 +406,8 @@ $(function () {
   $(function () {
     $('#brands-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "brands/",
 
     columns: [
@@ -462,7 +466,8 @@ $(function () {
   $(function () {
     $('#taxrates-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "taxrates/",
 
     columns: [
@@ -522,8 +527,9 @@ $(function () {
 
   $(function () {
     $('#department-table').DataTable({
-           processing: true,
-           serverSide: true,
+        processing: true,
+        serverSide: false,
+        paging: true,
          ajax: "departments/",
          columns: [
            {
@@ -577,8 +583,9 @@ $(function () {
   $(function () {
 
     $('#designation-table').DataTable({
-           processing: true,
-           serverSide: true,
+          processing: true,
+          serverSide: false,
+          paging: true,
          ajax: "designations/",
          columns: [
            {
@@ -634,7 +641,8 @@ $(function () {
   $(function () {
     $('#products-table').DataTable({
         processing: true,
-        serverSide: true,
+        serverSide: false,
+        paging: true,
         ajax: "products/",
 
     columns: [
@@ -743,7 +751,8 @@ $(function () {
       $(function () {
         $('#suppliers-table').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
+            paging: true,
             ajax: "suppliers/",
 
         columns: [
@@ -1157,7 +1166,8 @@ $(function () {
     $(function () {
         $('#stock-table').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
+            paging: true,
             ajax: "stock-list",
 
         columns: [
@@ -1223,8 +1233,9 @@ $(function () {
       $(function () {
 
         $('#district-table').DataTable({
-               processing: true,
-               serverSide: true,
+            processing: true,
+            serverSide: false,
+            paging: true,
              ajax: "districts/",
              columns: [
                {
@@ -1284,8 +1295,9 @@ $(function () {
       $(function () {
 
         $('#block-table').DataTable({
-               processing: true,
-               serverSide: true,
+            processing: true,
+            serverSide: false,
+            paging: true,
              ajax: "blocks/",
              columns: [
                {
@@ -1345,8 +1357,9 @@ $(function () {
       $(function () {
 
         $('#panchayat-table').DataTable({
-               processing: true,
-               serverSide: true,
+            processing: true,
+            serverSide: false,
+            paging: true,
              ajax: "panchayats/",
              columns: [
                {
@@ -1408,8 +1421,9 @@ $(function () {
       $(function () {
 
         $('#village-table').DataTable({
-               processing: true,
-               serverSide: true,
+            processing: true,
+            serverSide: false,
+            paging: true,
              ajax: "villages/",
              columns: [
                {
@@ -1520,8 +1534,9 @@ $(function () {
 
           $(function () {
             $('#clients-table').DataTable({
-                processing: true,
-                serverSide: true,
+              processing: true,
+              serverSide: false,
+              paging: true,
                 ajax: "clients/",
 
             columns: [
@@ -1609,8 +1624,9 @@ $(function () {
     $(function () {
 
         var table = $('#project-table').DataTable({
-            processing: true,
-            serverSide: true,
+          processing: true,
+          serverSide: false,
+          paging: true,
             ajax: "/project",
             columns: [
                 {
@@ -1643,7 +1659,8 @@ $(function () {
 
         var table = $('#project-phase-table').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
+            paging: true,
             ajax: "/project/phases",
             columns: [
                 {
@@ -1677,8 +1694,9 @@ $(function () {
 
     $(function () {
         $('#expense-table').DataTable({
-            processing: true,
-            serverSide: true,
+          processing: true,
+          serverSide: false,
+          paging: true,
             ajax: "expenses/",
 
         columns: [

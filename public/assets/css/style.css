@@ -461,6 +461,7 @@ ul.list-check li:before {
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a {
   border: 0;
+  color: #ff3700;
 }
 
 .nav > li > a:focus,
